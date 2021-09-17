@@ -91,4 +91,6 @@ dependencies {
 
 // Koin AndroidX Experimental features
     implementation "io.insert-koin:koin-androidx-ext:$koin_version"
+
+    implementation files('libs/libDaumMapAndroid.jar')
 }

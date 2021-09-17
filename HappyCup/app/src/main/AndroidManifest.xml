@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
     <application
         android:allowBackup="true"
@@ -15,6 +16,7 @@
         android:name=".data.di.MyApplication"
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.HappyCup">
         <activity
             android:name=".ui.main.view.activity.LoginActivity"
@@ -29,7 +31,9 @@
         <activity
             android:name=".ui.main.view.activity.MainActivity"
             android:exported="true">
+
         </activity>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="54503fd3af9327fcbcc8173a9a8481d3"/>
 
     </application>
 
