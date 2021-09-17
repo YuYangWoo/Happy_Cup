@@ -11,11 +11,13 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import net.daum.mf.map.api.MapView
 
 
@@ -35,6 +37,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         super.init()
         initSupportActionBar()
         initNavigationView()
+        initNavHeader()
+    }
+
+    private fun initNavHeader() {
+        Log.d("init", "initNavHeader: ${MySharedPreferences.getLoginInformation(this@MainActivity).name}")
+        binding.navigation.getHeaderView(0).apply {
+            findViewById<TextView>(R.id.txtHead).text = "${MySharedPreferences.getLoginInformation(this@MainActivity).name}" +
+                    "님의 등급은 수호자입니다."
+            findViewById<TextView>(R.id.txtPoint).text = "잔여포인트 ${MySharedPreferences.getLoginInformation(this@MainActivity).point}"
+        }
     }
 
     // 툴바 구현 + 툴바에 Controller와 appBarConfiguration 결합

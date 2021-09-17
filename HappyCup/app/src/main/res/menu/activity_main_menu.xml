@@ -3,4 +3,10 @@
     <item
         android:id="@+id/mainFragment"
         android:title="메인화면" />
+    <item
+        android:id="@+id/myPageFragment"
+        android:title="마이페이지" />
+    <item
+        android:id="@+id/optionFragment"
+        android:title="설정" />
 </menu>

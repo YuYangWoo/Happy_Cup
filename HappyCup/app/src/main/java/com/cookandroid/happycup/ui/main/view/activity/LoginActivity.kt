@@ -54,7 +54,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                         dialog.dismiss()
                         when (resource.data!!.code()) {
                             200 -> {
-                                Log.d(TAG, "initViewModel: ${resource.data!!}")
+                                Log.d(TAG, "initViewModel: ${resource.data.body()!!}")
                                 loginResponse = resource.data.body()!!
                                 loginApi()
                             }
@@ -109,6 +109,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             )
             MySharedPreferences.setUserId(this@LoginActivity, binding.edtId.editText!!.text.toString())
             MySharedPreferences.setUserPass(this@LoginActivity, binding.edtPassword.editText!!.text.toString())
+            MySharedPreferences.setLoginInformation(this@LoginActivity, loginResponse)
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
 

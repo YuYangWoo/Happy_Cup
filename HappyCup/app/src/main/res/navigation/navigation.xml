@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.cookandroid.happycup.ui.main.view.fragment.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_myPageFragment"
+            app:destination="@id/myPageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_optionFragment"
+            app:destination="@id/optionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myPageFragment"
+        android:name="com.cookandroid.happycup.ui.main.view.fragment.MyPageFragment"
+        android:label="MyPageFragment" />
+    <fragment
+        android:id="@+id/optionFragment"
+        android:name="com.cookandroid.happycup.ui.main.view.fragment.OptionFragment"
+        android:label="OptionFragment" />
 </navigation>
