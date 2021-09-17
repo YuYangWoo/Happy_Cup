@@ -4,4 +4,7 @@
     <string name="password">비밀번호</string>
     <string name="login">로그인</string>
     <string name="auto_login">자동로그인</string>
+    <string name="connect_fail">연결실패</string>
+    <string name="confirm_login">님 로그인 되었습니다.</string>
+
 </resources>

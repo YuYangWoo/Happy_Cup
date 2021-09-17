@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
@@ -15,37 +16,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.4" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintBottom_toBottomOf="@id/cstGuide"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/logo" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edtId"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/moon"
             android:hint="@string/id"
             android:inputType="textPersonName"
             android:textColor="@color/moon"
             app:endIconMode="clear_text"
-            app:layout_constraintBottom_toTopOf="@+id/edtPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cstGuide"
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F3F7FC"
+                android:background="@color/subColor"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -54,20 +57,21 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/moon"
             android:hint="@string/password"
             android:inputType="textPersonName|textPassword"
             android:textColor="@color/moon"
             app:endIconMode="password_toggle"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtId"
             app:layout_constraintWidth_percent="0.8">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F3F7FC"
+                android:background="@color/subColor"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,15 +79,18 @@
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="10dp"
             android:text="@string/auto_login"
             android:textColor="@color/nickel"
-            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
-            app:layout_constraintStart_toStartOf="@+id/edtPassword" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
 
         <android.widget.Button
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginTop="15dp"
             android:background="@color/mainColor"
             android:text="@string/login"
             android:textColor="@color/white"
@@ -91,7 +98,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/guide2"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox"
             app:layout_constraintWidth_percent="0.8" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -100,6 +107,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.9"/>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/cstGuide"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/cupping" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

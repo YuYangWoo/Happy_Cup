@@ -1,0 +1,22 @@
+package com.cookandroid.happycup.ui.main.view.dialog
+
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
+import android.graphics.drawable.ColorDrawable
+import android.view.Window
+import com.cookandroid.gachon_study_room.ui.base.BaseDialog
+import com.cookandroid.happycup.R
+import com.cookandroid.happycup.databinding.DialogLoadingBinding
+
+// Loading Progress Bar
+class ProgressDialog(context: Context) : BaseDialog<DialogLoadingBinding>(context, R.layout.dialog_loading) {
+    override fun init() {
+        super.init()
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//        setCancelable(false)
+        var loadingAnimation = binding.pbLoading.drawable as AnimationDrawable
+        loadingAnimation.start()
+    }
+}
