@@ -7,11 +7,13 @@ import android.content.pm.PackageManager
 import android.content.pm.PackageInfo
 import android.util.Base64
 import android.util.Log
+import android.view.Gravity
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.GravityCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -38,10 +40,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initSupportActionBar()
         initNavigationView()
         initNavHeader()
+        binding.btnHamburger.setOnClickListener {
+            if(binding.drawer.isDrawerOpen(GravityCompat.START)) {
+                binding.drawer.closeDrawer(GravityCompat.START)
+            }
+            else {
+                binding.drawer.openDrawer(GravityCompat.START)
+            }
+        }
     }
 
     private fun initNavHeader() {
-        Log.d("init", "initNavHeader: ${MySharedPreferences.getLoginInformation(this@MainActivity).name}")
         binding.navigation.getHeaderView(0).apply {
             findViewById<TextView>(R.id.txtHead).text = "${MySharedPreferences.getLoginInformation(this@MainActivity).name}" +
                     "님의 등급은 수호자입니다."
