@@ -1,4 +1,4 @@
-package com.cookandroid.gachon_study_room.ui.base
+package com.cookandroid.happycup.ui.base
 
 import android.content.Context
 import android.os.Bundle
