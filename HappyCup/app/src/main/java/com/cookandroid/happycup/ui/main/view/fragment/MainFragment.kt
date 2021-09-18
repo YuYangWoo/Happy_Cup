@@ -12,6 +12,8 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.media.audiofx.BassBoost
 import android.net.Uri
+import android.os.Build
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
@@ -23,12 +25,12 @@ import com.cookandroid.happycup.ui.base.BaseFragment
 import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
 import net.daum.mf.map.api.MapView
+import kotlin.math.log
 
 
 class MainFragment :
     BaseFragment<FragmentMainBinding>(com.cookandroid.happycup.R.layout.fragment_main) {
-    private val ACCESS_FINE_LOCATION = 1000
-    private val TAG = "Main_Fragment"
+
     override fun init() {
         super.init()
         mapViewSetUp()
@@ -37,22 +39,37 @@ class MainFragment :
 
     private fun mapViewSetUp() {
         // 권한 승인 되어 있으면 Tracking
-        if (checkLocationService() &&
+        if (checkLocationServicesStatus() &&
             requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
             Log.d(TAG, "mapViewSetUp: 권한승인 ")
             startTracking()
         }
-        else if (checkLocationService()) {
+        else if (checkLocationServicesStatus()) {
             // GPS가 켜져있을 경우
-            permissionCheck()
+            Log.d(TAG, "mapViewSetUp: gps on ")
+
+            requestRuntimePermissions()
         } else {
             // GPS가 꺼져있을 경우
-            toast(requireContext(), "GPS를 켜주세요")
+            Log.d(TAG, "mapViewSetUp: gps off ")
+
+            showDialogForLocationServiceSetting()
         }
         binding.btnGps.setOnClickListener {
-
+            if (checkLocationServicesStatus() &&
+                requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                mapStatus = if(!mapStatus) {
+                    startTracking()
+                    true
+                } else {
+                    startTracking2()
+                    false
+                }
+            }
         }
 
     }
@@ -66,93 +83,89 @@ class MainFragment :
             }
         }
     }
-
-    // 위치 권한 확인
-    private fun permissionCheck() {
-        val preference = requireActivity().getPreferences(MODE_PRIVATE)
-        val isFirstCheck = preference.getBoolean("isFirstPermissionCheck", true)
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // 권한이 없는 상태
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    requireContext() as Activity,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            ) {
-                // 권한 거절 (다시 한 번 물어봄)
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setMessage("현재 위치를 확인하시려면 위치 권한을 허용해주세요.")
-                builder.setPositiveButton("확인") { dialog, which ->
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        ACCESS_FINE_LOCATION
-                    )
-                }
-                builder.setNegativeButton("취소") { dialog, which ->
-
-                }
-                builder.show()
-            } else {
-                if (isFirstCheck) {
-                    // 최초 권한 요청
-                    preference.edit().putBoolean("isFirstPermissionCheck", false).apply()
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        ACCESS_FINE_LOCATION
-                    )
-                } else {
-                    // 다시 묻지 않음 클릭 (앱 정보 화면으로 이동)
-                    val builder = AlertDialog.Builder(requireContext())
-                    builder.setMessage("현재 위치를 확인하시려면 설정에서 위치 권한을 허용해주세요.")
-                    builder.setPositiveButton("설정으로 이동") { dialog, which ->
-                        val intent = Intent(
-                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:${requireActivity().packageName}")
-                        )
-                        startActivity(intent)
-                    }
-                    builder.setNegativeButton("취소") { dialog, which ->
-
-                    }
-                    builder.show()
-                }
-            }
+    // 위치 권한 요청
+    private fun requestRuntimePermissions() {
+        if (requireActivity().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+         startTracking()
         } else {
-            // 권한이 있는 상태
-            startTracking()
+            ActivityCompat.requestPermissions(requireActivity(),arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSION_REQUEST_CODE)
+
         }
     }
 
-    // 권한 요청 후 행동
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == ACCESS_FINE_LOCATION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // 권한 요청 후 승인됨 (추적 시작)
-                toast(requireActivity(), "위치 권한이 승인되었습니다")
-                startTracking()
-            } else {
-                // 권한 요청 후 거절됨 (다시 요청 or 토스트)
-                toast(requireActivity(), "위치 권한이 거절되었습니다")
-                permissionCheck()
+    // 권한 요청 결과 받기
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        when (requestCode) {
+            PERMISSION_REQUEST_CODE -> {
+                if (grantResults.isEmpty()) {
+                    throw RuntimeException("권한이 비어있습니다.")
+                }
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "onRequestPermissionsResult: 사용자가 승인했습니다.")
+                    startTracking()
+                } else {
+                    if (shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        Log.d(TAG, "사용자가 권한요청을 거부했습니다. 계속 요청하겠습니다.")
+                        ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                            PERMISSION_REQUEST_CODE)
+
+                    } else {
+                        Log.d(TAG, "사용자가 거절했습니다.")
+                        showDialogToGetPermission()
+                    }
+                }
             }
         }
     }
 
-    // GPS가 켜져있는지 확인
-    private fun checkLocationService(): Boolean {
-        val locationManager =
-            requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    // 다이얼로그로 권한 얻기
+    private fun showDialogToGetPermission() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("권한 요청")
+            .setMessage("앱을 사용하기 위해서는 권한 요청이 필요합니다. " +
+                    "OK를 누르면 권한 설정 창으로 이동합니다.")
+        builder.setPositiveButton("OK") { dialogInterface, i ->
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                Uri.fromParts("package", requireActivity().packageName, null))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+        builder.setNegativeButton("Later") { dialogInterface, i ->
+            // ignore
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    // GPS 설정으로 이동
+    private fun showDialogForLocationServiceSetting() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("위치 서비스 비활성화")
+        builder.setMessage(
+            """
+                앱을 사용하기 위해서는 위치 서비스가 필요합니다.
+                위치 서비스를 설정하시려면 설정을 눌러주세요
+                """.trimIndent()
+        )
+        builder.setCancelable(true)
+        builder.setPositiveButton("설정") { dialog, id ->
+            val callGPSSettingIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivityForResult(callGPSSettingIntent, GPS_ENABLE_REQUEST_CODE)
+        }
+        builder.setNegativeButton("취소"
+        ) { dialog, id -> dialog.cancel() }
+        builder.create().show()
+
+    }
+
+    // 위치 서비스 상태확인
+    private fun checkLocationServicesStatus(): Boolean {
+        val locationManager = requireActivity().getSystemService(LOCATION_SERVICE) as LocationManager
+        return (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
     }
 
     // 위치추적 시작
@@ -160,11 +173,21 @@ class MainFragment :
         binding.mapView.currentLocationTrackingMode =
             MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
     }
+    private fun startTracking2() {
+        binding.mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithHeading
+    }
 
     // 위치추적 중지
     private fun stopTracking() {
         binding.mapView.currentLocationTrackingMode =
             MapView.CurrentLocationTrackingMode.TrackingModeOff
+    }
+
+    companion object {
+        private const val GPS_ENABLE_REQUEST_CODE = 2001
+        const val TAG = "Main_F"
+        const val PERMISSION_REQUEST_CODE = 1001
+        private var mapStatus = false
     }
 
 }
