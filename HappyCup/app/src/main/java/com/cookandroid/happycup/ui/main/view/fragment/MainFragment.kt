@@ -86,7 +86,7 @@ class MainFragment :
         binding.mapView.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
         val marker = MapPOIItem()
         marker.apply {
-            itemName = "옆집"   // 마커 이름
+            itemName = "무인기"   // 마커 이름
             mapPoint = MapPoint.mapPointWithGeoCoord(37.23135, 127.21004)   // 좌표
             markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
             customImageResourceId = R.drawable.custom_poi_marker               // 커스텀 마커 이미지
@@ -106,13 +106,13 @@ class MainFragment :
         override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
             // 마커 클릭 시 나오는 말풍선
             name.text = poiItem?.itemName   // 해당 마커의 정보 이용 가능
-            address.text = "getCalloutBalloon"
+            address.text = "무인기"
             return mCalloutBalloon
         }
 
         override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
             // 말풍선 클릭 시
-            address.text = "getPressedCalloutBalloon"
+            address.text = "무인기"
             return mCalloutBalloon
         }
     }
@@ -130,11 +130,11 @@ class MainFragment :
         override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?) {
             // 말풍선 클릭 시
             val builder = androidx.appcompat.app.AlertDialog.Builder(context)
-            val itemList = arrayOf("옆집", "마커 삭제", "취소")
+            val itemList = arrayOf("무인기", "마커 삭제", "취소")
             builder.setTitle("${poiItem?.itemName}")
             builder.setItems(itemList) { dialog, which ->
                 when(which) {
-                    0 -> Toast.makeText(context, "옆집놈", Toast.LENGTH_SHORT).show()  // 토스트
+                    0 -> Toast.makeText(context, "무인기", Toast.LENGTH_SHORT).show()  // 토스트
                     1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
                     2 -> dialog.dismiss()   // 대화상자 닫기
                 }
