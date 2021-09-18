@@ -20,6 +20,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import net.daum.mf.map.api.MapView
 
 
@@ -28,6 +29,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         (supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment).navController
     }
 
+    // 중심 프래그먼트 지정
     private val appBarConfiguration by lazy {
         AppBarConfiguration(
             setOf(R.id.mainFragment),
@@ -40,14 +42,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         initSupportActionBar()
         initNavigationView()
         initNavHeader()
-        binding.btnHamburger.setOnClickListener {
-            if(binding.drawer.isDrawerOpen(GravityCompat.START)) {
-                binding.drawer.closeDrawer(GravityCompat.START)
-            }
-            else {
-                binding.drawer.openDrawer(GravityCompat.START)
-            }
-        }
     }
 
     private fun initNavHeader() {
