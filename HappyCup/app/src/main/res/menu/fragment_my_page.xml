@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/alram"
+        android:title="알람"
+        android:icon="@drawable/alram"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/setting"
+        android:title="설정"
+        android:icon="@drawable/setting"
+        app:showAsAction="ifRoom"/>
+</menu>

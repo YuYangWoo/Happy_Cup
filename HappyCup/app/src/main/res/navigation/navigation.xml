@@ -18,7 +18,14 @@
     <fragment
         android:id="@+id/myPageFragment"
         android:name="com.cookandroid.happycup.ui.main.view.fragment.MyPageFragment"
-        android:label="MyPageFragment" />
+        android:label="MyPageFragment" >
+        <action
+            android:id="@+id/action_myPageFragment_to_optionFragment"
+            app:destination="@id/optionFragment" />
+        <action
+            android:id="@+id/action_myPageFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/optionFragment"
         android:name="com.cookandroid.happycup.ui.main.view.fragment.OptionFragment"
