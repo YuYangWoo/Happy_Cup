@@ -89,15 +89,16 @@ class MainFragment :
             itemName = "무인기"   // 마커 이름
             mapPoint = MapPoint.mapPointWithGeoCoord(37.23135, 127.21004)   // 좌표
             markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
-            customImageResourceId = R.drawable.custom_poi_marker               // 커스텀 마커 이미지
+            customImageResourceId = R.drawable.marker              // 커스텀 마커 이미지
             selectedMarkerType = MapPOIItem.MarkerType.CustomImage  // 클릭 시 마커 모양 (커스텀)
-            customSelectedImageResourceId = R.drawable.custom_poi_marker_end       // 클릭 시 커스텀 마커 이미지
+            customSelectedImageResourceId = R.drawable.selected_marker       // 클릭 시 커스텀 마커 이미지
             isCustomImageAutoscale = false      // 커스텀 마커 이미지 크기 자동 조정
             //setCustomImageAnchor(0.5f, 1.0f)    // 마커 이미지 기준점
         }
         binding.mapView.addPOIItem(marker)
     }
 
+    // 마커 클릭 시
     class CustomBalloonAdapter(inflater: LayoutInflater): CalloutBalloonAdapter {
         val mCalloutBalloon: View = inflater.inflate(R.layout.activity_ballon, null)
         val name: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_name)
