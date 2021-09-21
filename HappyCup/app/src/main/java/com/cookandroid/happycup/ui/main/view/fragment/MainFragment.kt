@@ -25,9 +25,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
 import com.cookandroid.happycup.R
+import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.ui.base.BaseFragment
 import com.cookandroid.happycup.databinding.FragmentMainBinding
+import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
+import com.google.zxing.integration.android.IntentIntegrator
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -36,13 +39,47 @@ import kotlin.math.log
 
 
 class MainFragment :
-    BaseFragment<FragmentMainBinding>(com.cookandroid.happycup.R.layout.fragment_main) {
-    private val eventListener by lazy {MarkerEventListener(requireContext())}   // 마커 클릭 이벤트 리스너
+    BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+    private val eventListener by lazy { MarkerEventListener(requireContext()) }   // 마커 클릭 이벤트 리스너
+
     override fun init() {
         super.init()
         mapViewSetUp()
         btnHamburger()
         makeMarker()
+        btnQr()
+    }
+
+    private fun btnQr() {
+        binding.btnQr.setOnClickListener {
+            scanQRCode()
+        }
+    }
+
+    // QR Reader
+    private fun scanQRCode() {
+        val integrator = IntentIntegrator.forSupportFragment(this).apply {
+            captureActivity = CaptureActivity::class.java // 가로 세로
+            setOrientationLocked(false)
+            setPrompt("Scan QR code")
+            setBeepEnabled(false) // 소리 on off
+            setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        }
+        integrator.initiateScan()
+    }
+
+    // QR 결과
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                toast(requireContext(), "Cancelled")
+            } else { // 스캔 되었을 때
+                Log.d(TAG, result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     private fun mapViewSetUp() {
@@ -56,12 +93,10 @@ class MainFragment :
         } else if (checkLocationServicesStatus()) {
             // GPS가 켜져있을 경우
             Log.d(TAG, "mapViewSetUp: gps on ")
-
             requestRuntimePermissions()
         } else {
             // GPS가 꺼져있을 경우
             Log.d(TAG, "mapViewSetUp: gps off ")
-
             showDialogForLocationServiceSetting()
         }
         binding.btnGps.setOnClickListener {
@@ -99,7 +134,7 @@ class MainFragment :
     }
 
     // 마커 클릭 시
-    class CustomBalloonAdapter(inflater: LayoutInflater): CalloutBalloonAdapter {
+    class CustomBalloonAdapter(inflater: LayoutInflater) : CalloutBalloonAdapter {
         val mCalloutBalloon: View = inflater.inflate(R.layout.activity_ballon, null)
         val name: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_name)
         val address: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_address)
@@ -118,7 +153,7 @@ class MainFragment :
         }
     }
 
-    class MarkerEventListener(val context: Context): MapView.POIItemEventListener {
+    class MarkerEventListener(val context: Context) : MapView.POIItemEventListener {
         override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
             // 마커 클릭 시
         }
@@ -128,13 +163,17 @@ class MainFragment :
             // 이 함수도 작동하지만 그냥 아래 있는 함수에 작성하자
         }
 
-        override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?) {
+        override fun onCalloutBalloonOfPOIItemTouched(
+            mapView: MapView?,
+            poiItem: MapPOIItem?,
+            buttonType: MapPOIItem.CalloutBalloonButtonType?
+        ) {
             // 말풍선 클릭 시
             val builder = androidx.appcompat.app.AlertDialog.Builder(context)
             val itemList = arrayOf("무인기", "마커 삭제", "취소")
             builder.setTitle("${poiItem?.itemName}")
             builder.setItems(itemList) { dialog, which ->
-                when(which) {
+                when (which) {
                     0 -> Toast.makeText(context, "무인기", Toast.LENGTH_SHORT).show()  // 토스트
                     1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
                     2 -> dialog.dismiss()   // 대화상자 닫기
@@ -143,7 +182,11 @@ class MainFragment :
             builder.show()
         }
 
-        override fun onDraggablePOIItemMoved(mapView: MapView?, poiItem: MapPOIItem?, mapPoint: MapPoint?) {
+        override fun onDraggablePOIItemMoved(
+            mapView: MapView?,
+            poiItem: MapPOIItem?,
+            mapPoint: MapPoint?
+        ) {
             // 마커의 속성 중 isDraggable = true 일 때 마커를 이동시켰을 경우
         }
     }
