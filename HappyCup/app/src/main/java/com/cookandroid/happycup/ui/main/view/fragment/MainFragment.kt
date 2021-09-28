@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
+import androidx.navigation.fragment.findNavController
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.ui.base.BaseFragment
@@ -47,12 +48,15 @@ class MainFragment :
         mapViewSetUp()
         btnHamburger()
         makeMarker()
-        btnQr()
+        btn()
     }
 
-    private fun btnQr() {
+    private fun btn() {
         binding.btnQr.setOnClickListener {
             scanQRCode()
+        }
+        binding.btnShop.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToShopFragment())
         }
     }
 
