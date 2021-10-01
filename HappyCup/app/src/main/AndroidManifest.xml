@@ -21,9 +21,7 @@
         <activity
             android:name=".ui.main.view.activity.LoginActivity"
             android:exported="true">
-
         </activity>
-
         <activity
             android:name=".ui.main.view.activity.MainActivity"
             android:exported="true">

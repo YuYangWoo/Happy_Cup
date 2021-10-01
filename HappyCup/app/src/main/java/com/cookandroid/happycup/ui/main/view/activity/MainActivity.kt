@@ -46,9 +46,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun initNavHeader() {
         binding.navigation.getHeaderView(0).apply {
-            findViewById<TextView>(R.id.txtHead).text = "${MySharedPreferences.getLoginInformation(this@MainActivity).name}" +
-                    "님의 등급은 수호자입니다."
-            findViewById<TextView>(R.id.txtPoint).text = "잔여포인트 ${MySharedPreferences.getLoginInformation(this@MainActivity).point}"
+//            findViewById<TextView>(R.id.txtHead).text = "쿠쿠다스님의 등급은 수호자입니다"
+//            findViewById<TextView>(R.id.txtPoint).text = "잔여포인트 8,998P"
         }
     }
 

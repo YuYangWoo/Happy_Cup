@@ -146,6 +146,7 @@ class MainFragment :
         override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
             // 마커 클릭 시 나오는 말풍선
             name.text = poiItem?.itemName   // 해당 마커의 정보 이용 가능
+            Log.d(TAG, "getCalloutBalloon: 1111 ${poiItem!!.mapPoint}")
             address.text = "무인기"
             return mCalloutBalloon
         }
@@ -153,6 +154,7 @@ class MainFragment :
         override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
             // 말풍선 클릭 시
             address.text = "무인기"
+            Log.d(TAG, "getCalloutBalloon: 2222 ${poiItem!!.mapPoint}")
             return mCalloutBalloon
         }
     }
@@ -173,6 +175,7 @@ class MainFragment :
             buttonType: MapPOIItem.CalloutBalloonButtonType?
         ) {
             // 말풍선 클릭 시
+            Log.d(TAG, "getCalloutBalloon: 3333")
             val builder = androidx.appcompat.app.AlertDialog.Builder(context)
             val itemList = arrayOf("무인기", "마커 삭제", "취소")
             builder.setTitle("${poiItem?.itemName}")
