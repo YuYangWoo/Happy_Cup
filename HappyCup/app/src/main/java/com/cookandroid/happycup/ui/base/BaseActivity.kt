@@ -13,7 +13,7 @@ abstract class BaseActivity<VB : ViewDataBinding>(private val layoutId: Int) : A
     lateinit var binding: VB
     private val TAG = "BASEACTIVITY"
     override fun onCreate(savedInstanceState: Bundle?) {
-//        splash()
+        splash()
         super.onCreate(savedInstanceState)
         init()
     }
@@ -22,9 +22,9 @@ abstract class BaseActivity<VB : ViewDataBinding>(private val layoutId: Int) : A
         initViewDataBinding()
     }
 
-//    protected open fun splash() {
-//        setTheme(R.style.Theme_Gachon_Study_Room)
-//    }
+    protected open fun splash() {
+        setTheme(R.style.Theme_HappyCup)
+    }
 
     protected open fun initViewDataBinding() {
         binding = DataBindingUtil.setContentView(this, layoutId)
