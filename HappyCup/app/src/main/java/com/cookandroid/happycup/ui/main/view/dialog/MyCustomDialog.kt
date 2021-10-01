@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import android.view.LayoutInflater
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.cookandroid.gachon_study_room.ui.base.BaseDialog
 import com.cookandroid.happycup.R
@@ -35,32 +37,34 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<Cu
         window!!.setGravity(Gravity.TOP) // 팝업창 위로 배치
 
         window!!.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        bindingTwo = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.dialog_list,
+            null,
+            false
+        )
         // 어플이 사용되는 동안 화면 끄지 않기.
         binding.declarationBtn.setOnClickListener {
-
-            bindingTwo = DataBindingUtil.inflate(
-                LayoutInflater.from(context),
-                R.layout.dialog_list,
-                null,
-                false
-            )
-            bindingTwo.dialBtn0.setOnClickListener {
+            setContentView(R.layout.dialog_list)
+            findViewById<TextView>(R.id.dial_btn_0).setOnClickListener {
                 setContentView(R.layout.dialog_alert)
                 window!!.setGravity(Gravity.CENTER)
             }
-            bindingTwo.dialBtn1.setOnClickListener {
+            findViewById<TextView>(R.id.dial_btn_1).setOnClickListener {
                 setContentView(R.layout.dialog_alert)
                 window!!.setGravity(Gravity.CENTER)
             }
-            bindingTwo.dialBtn2.setOnClickListener {
+            findViewById<TextView>(R.id.dial_btn_2).setOnClickListener {
                 setContentView(R.layout.dialog_alert)
                 window!!.setGravity(Gravity.CENTER)
             }
-            bindingTwo.dialBtn3.setOnClickListener {
+            findViewById<TextView>(R.id.dial_btn_3).setOnClickListener {
                 setContentView(R.layout.dialog_alert)
                 window!!.setGravity(Gravity.CENTER)
             }
-
+            findViewById<Button>(R.id.dial_btn_4).setOnClickListener {
+                dismiss()
+            }
             window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
             window!!.setGravity(Gravity.BOTTOM) // 팝업창 위로 배치
