@@ -58,6 +58,7 @@
                 android:drawableStart="@drawable/setting"
                 android:layout_marginStart="20dp"
                 android:paddingStart="5dp"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:layout_marginBottom="20dp"
                 android:text="환경설정"/>

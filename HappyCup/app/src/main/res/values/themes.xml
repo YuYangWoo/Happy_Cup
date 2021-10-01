@@ -20,8 +20,8 @@
         <item name="android:textSize">20sp</item><!-- text size in menu-->
         <item name="android:textColor">#000000</item>
         <!-- item size in menu-->
-        <item name="android:listPreferredItemHeightSmall">40dp</item>
-        <item name="listPreferredItemHeightSmall">40dp</item>
+        <item name="android:listPreferredItemHeightSmall">30dp</item>
+        <item name="listPreferredItemHeightSmall">30dp</item>
 
         <!-- item padding left in menu-->
         <item name="android:listPreferredItemPaddingLeft">8dp</item>

@@ -16,39 +16,38 @@
         android:orientation="vertical">
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <android.widget.Button
             android:id="@+id/btnHamburger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:clickable="true"
-            android:src="@drawable/hamburger"
+            android:background="@drawable/btn_threebar"
             app:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <android.widget.Button
             android:id="@+id/btnShop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
-            android:src="@drawable/shop"
+            android:background="@drawable/btn_shopp"
             app:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <android.widget.Button
             android:id="@+id/btnGps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:src="@drawable/gps"
+            android:background="@drawable/btn_gps"
             app:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
