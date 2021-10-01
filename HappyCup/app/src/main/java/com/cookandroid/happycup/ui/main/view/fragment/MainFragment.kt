@@ -9,6 +9,7 @@ import android.content.Context.LOCATION_SERVICE
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.location.LocationManager
 import android.media.audiofx.BassBoost
 import android.net.Uri
@@ -31,6 +32,7 @@ import com.cookandroid.happycup.ui.base.BaseFragment
 import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
+import com.cookandroid.happycup.ui.main.view.dialog.MyCustomDialog
 import com.google.zxing.integration.android.IntentIntegrator
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
@@ -47,8 +49,16 @@ class MainFragment :
         super.init()
         mapViewSetUp()
         btnHamburger()
-        makeMarker()
         btn()
+        initMapView()
+    }
+
+    private fun initMapView() {
+        binding.mapView.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
+        binding.mapView.setZoomLevel(3, true)
+        makeMarker("커핑 동천점",37.332255,127.102127)
+        makeMarker("커핑 판교점",37.40290225113107,127.10664819647337)
+        makeMarker("우리집", 37.23135,127.21004)
     }
 
     private fun btn() {
@@ -120,82 +130,45 @@ class MainFragment :
 
     }
 
-    private fun makeMarker() {
-        binding.mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
-        binding.mapView.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
+    private fun makeMarker(name : String, Latitude : Double, Longitude : Double) {
         val marker = MapPOIItem()
         marker.apply {
-            itemName = "무인기"   // 마커 이름
-            mapPoint = MapPoint.mapPointWithGeoCoord(37.23135, 127.21004)   // 좌표
+            itemName = name   // 마커 이름
+            mapPoint = MapPoint.mapPointWithGeoCoord(Latitude, Longitude)   // 좌표
             markerType = MapPOIItem.MarkerType.CustomImage          // 마커 모양 (커스텀)
-            customImageResourceId = R.drawable.marker              // 커스텀 마커 이미지
+            customImageResourceId = R.drawable.marker           // 커스텀 마커 이미지
             selectedMarkerType = MapPOIItem.MarkerType.CustomImage  // 클릭 시 마커 모양 (커스텀)
-            customSelectedImageResourceId = R.drawable.selected_marker       // 클릭 시 커스텀 마커 이미지
+            customSelectedImageResourceId = R.drawable.selected_marker      // 클릭 시 커스텀 마커 이미지
             isCustomImageAutoscale = false      // 커스텀 마커 이미지 크기 자동 조정
             //setCustomImageAnchor(0.5f, 1.0f)    // 마커 이미지 기준점
         }
         binding.mapView.addPOIItem(marker)
     }
 
-    // 마커 클릭 시
-    class CustomBalloonAdapter(inflater: LayoutInflater) : CalloutBalloonAdapter {
-        val mCalloutBalloon: View = inflater.inflate(R.layout.activity_ballon, null)
-        val name: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_name)
-        val address: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_address)
-
-        override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
-            // 마커 클릭 시 나오는 말풍선
-            name.text = poiItem?.itemName   // 해당 마커의 정보 이용 가능
-            Log.d(TAG, "getCalloutBalloon: 1111 ${poiItem!!.mapPoint}")
-            address.text = "무인기"
-            return mCalloutBalloon
-        }
-
-        override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
-            // 말풍선 클릭 시
-            address.text = "무인기"
-            Log.d(TAG, "getCalloutBalloon: 2222 ${poiItem!!.mapPoint}")
-            return mCalloutBalloon
-        }
-    }
-
-    class MarkerEventListener(val context: Context) : MapView.POIItemEventListener {
+    class MarkerEventListener(val context: Context): MapView.POIItemEventListener {
+        // 마커 클릭시 메서드
         override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
-            // 마커 클릭 시
+            val lat: Double = poiItem?.getMapPoint()?.getMapPointGeoCoord()!!.latitude
+            val lng: Double = poiItem?.getMapPoint()?.getMapPointGeoCoord()!!.longitude
+            val myCustomDialog = MyCustomDialog(context,lat,lng)
+            myCustomDialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+            myCustomDialog.show()
+
         }
 
+        // 말풍선 생성 메서드
         override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?) {
-            // 말풍선 클릭 시 (Deprecated)
-            // 이 함수도 작동하지만 그냥 아래 있는 함수에 작성하자
+
         }
 
-        override fun onCalloutBalloonOfPOIItemTouched(
-            mapView: MapView?,
-            poiItem: MapPOIItem?,
-            buttonType: MapPOIItem.CalloutBalloonButtonType?
-        ) {
+        override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?) {
             // 말풍선 클릭 시
-            Log.d(TAG, "getCalloutBalloon: 3333")
-            val builder = androidx.appcompat.app.AlertDialog.Builder(context)
-            val itemList = arrayOf("무인기", "마커 삭제", "취소")
-            builder.setTitle("${poiItem?.itemName}")
-            builder.setItems(itemList) { dialog, which ->
-                when (which) {
-                    0 -> Toast.makeText(context, "무인기", Toast.LENGTH_SHORT).show()  // 토스트
-                    1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
-                    2 -> dialog.dismiss()   // 대화상자 닫기
-                }
-            }
-            builder.show()
         }
 
-        override fun onDraggablePOIItemMoved(
-            mapView: MapView?,
-            poiItem: MapPOIItem?,
-            mapPoint: MapPoint?
-        ) {
+        override fun onDraggablePOIItemMoved(mapView: MapView?, poiItem: MapPOIItem?, mapPoint: MapPoint?) {
             // 마커의 속성 중 isDraggable = true 일 때 마커를 이동시켰을 경우
         }
+
     }
 
     private fun btnHamburger() {

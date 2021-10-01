@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/dial_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/dialoglist_title"
+        android:text="신고 사유 선택"
+        android:textSize="15dp"
+        android:textColor="#000"
+        android:gravity="center"
+
+        />
+
+        <TextView
+            android:id="@+id/dial_btn_0"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/dialoglist"
+            android:text="회수기 고장"
+            android:textSize="20dp"
+            android:textColor="#000"
+            android:gravity="center"
+
+            />
+
+        <TextView
+            android:id="@+id/dial_btn_1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/dialoglist"
+            android:text="지저분한 주변 환경"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textColor="#000"
+
+            />
+
+        <TextView
+            android:id="@+id/dial_btn_2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="회수기 안에 컵이 꽉 참"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:background="@drawable/dialoglist"
+            android:textColor="#000"
+
+            />
+
+        <TextView
+            android:id="@+id/dial_btn_3"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="기타 사유 작성하기"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:background="@drawable/dialoglist_last"
+            android:textColor="#000"
+
+            />
+
+    <Button
+        android:id="@+id/dial_btn_4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:text="취소"
+        android:textSize="20dp"
+        android:background="@drawable/dialoglistcancel"
+        android:textColor="#000"
+
+        />
+
+</LinearLayout>
+</layout>

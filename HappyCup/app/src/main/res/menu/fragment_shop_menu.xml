@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mainFragment"
+        android:icon="@drawable/home"
+        android:title="메인화면" />
+    <item
+        android:icon="@drawable/recycle"
+        android:title="재활용" />
+    <item
+        android:id="@+id/shopFragment"
+        android:icon="@drawable/shopp"
+        android:title="커핑샵" />
+    <item
+        android:id="@+id/myPageFragment"
+        android:icon="@drawable/mypage"
+        android:title="마이페이지" />
+</menu>
