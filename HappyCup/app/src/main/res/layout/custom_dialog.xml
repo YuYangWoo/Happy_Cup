@@ -72,11 +72,12 @@
 
         <Button
             android:layout_width="0px"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:background="@drawable/border"
             android:backgroundTint="#028472"
             android:layout_weight="3"
             android:text="정상작동중"
+            android:gravity="center"
             android:textSize="11dp"
             />
     </LinearLayout>

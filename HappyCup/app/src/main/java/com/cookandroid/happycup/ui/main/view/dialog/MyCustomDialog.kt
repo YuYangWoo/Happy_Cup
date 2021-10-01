@@ -82,11 +82,11 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<Cu
             //locationRequest.interval = 10000 // 내 위치 지도 전달 간격
             //locationRequest.fastestInterval = 5000 // 지도 갱신 간격.
 
-//            fusedLocationProviderClient.requestLocationUpdates(
-//                locationRequest,
-//                locationCallback,
-//                null
-//            )
+            fusedLocationProviderClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                null
+            )
 
             MyLocationCallBack()
         }
