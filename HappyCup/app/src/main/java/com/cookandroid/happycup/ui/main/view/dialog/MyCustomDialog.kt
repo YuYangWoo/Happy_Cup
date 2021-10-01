@@ -13,12 +13,13 @@ import androidx.core.content.ContextCompat.startActivity
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
+import com.cookandroid.gachon_study_room.ui.base.BaseDialog
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.databinding.CustomDialogBinding
 import com.cookandroid.happycup.databinding.DialogListBinding
 import com.google.android.gms.location.*
 
-class MyCustomDialog(context: Context, lat: Double, lng: Double) : Dialog(context) {
+class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<CustomDialogBinding>(context, R.layout.custom_dialog) {
     val TAG: String = "로그"
     val lat = lat
     val lng = lng
@@ -26,18 +27,10 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : Dialog(contex
     lateinit var locationRequest: LocationRequest // 위치 요청
     lateinit var locationCallback: MyLocationCallBack // 내부 클래스, 위치 변경 후 지도에 표시.
     val REQUEST_ACCESS_FINE_LOCATION = 1000
-    private lateinit var binding: CustomDialogBinding
     private lateinit var bindingTwo: DialogListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            R.layout.custom_dialog,
-            null,
-            false
-        )
 
         window!!.setGravity(Gravity.TOP) // 팝업창 위로 배치
 
