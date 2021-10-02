@@ -2,6 +2,9 @@ package com.cookandroid.happycup.ui.main.view.activity
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.model.request.LoginRequest
 import com.cookandroid.happycup.data.model.response.LoginResponse
@@ -28,6 +31,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         checkAutoLogin()
         btnLogin()
         checkBox()
+        binding.fragment1.visibility = View.GONE
+
+        if(MySharedPreferences.getOnBoarding(this)) { // 봤다면
+            binding.fragment1.visibility = View.GONE
+        }
+        else {
+            binding.fragment1.visibility = View.VISIBLE
+            // 구성요소
+            binding.btnLogin.visibility = View.GONE
+            binding.checkBox.visibility = View.GONE
+            binding.edtId.visibility = View.GONE
+            binding.edtPassword.visibility = View.GONE
+            binding.imageView.visibility = View.GONE
+            binding.imageView3.visibility = View.GONE
+            binding.guide2.visibility = View.GONE
+            binding.cstGuide.visibility = View.GONE
+        }
     }
 
     // 자동 로그인
