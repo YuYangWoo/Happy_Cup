@@ -5,122 +5,134 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-<FrameLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:weightSum="10"
-        >
-
-        <ImageView
-            android:layout_width="0px"
-            android:layout_height="match_parent"
-            android:background="@drawable/mylogo"
-            android:layout_weight="2"
-            />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="0px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:background="@android:color/white"
             android:orientation="vertical"
-            android:layout_weight="5"
             >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="커핑"
-                android:textColor="#000"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:padding="15dp"
+                android:weightSum="10"
+                >
 
-            <TextView
+                <ImageView
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/trash"
+                    android:layout_weight="2"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="vertical"
+                    android:layout_weight="5"
+                    >
+
+                    <TextView
+                        android:id="@+id/popname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="#000"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:progress="1"
+                        android:max="100"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        android:progressTint="#028472"
+                        android:progressBackgroundTint="#CCE6E3"
+                        android:value="1"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="0 명의 이용자가 방문"
+                        android:textColor="#000"
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="걸어서 1km 소요 예정"
+                        android:textColor="#028472"
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <android.widget.Button
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border"
+                    android:backgroundTint="#028472"
+                    android:layout_weight="3"
+                    android:text="정상작동중"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:text="50의 이용자가 방문"
-                android:textColor="#000"
-                android:textSize="11dp"
-                android:textStyle="bold" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:weightSum="10">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="걸어서 1km 소요 예정"
-                android:textColor="#028472"
-                android:textSize="11dp"
-                android:textStyle="bold" />
+                <android.widget.Button
+                    android:id="@+id/declaration_btn"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/border"
+                    android:text="신고하기"
+                    android:textColor="#000"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:layout_weight="5"
+                    />
 
+                <Button
+                    android:id="@+id/find_btn"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/border"
+                    android:backgroundTint="#028472"
+                    android:text="길안내 시작"
+                    android:textColor="#fff"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:layout_weight="5"
+                    />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <Button
-            android:layout_width="0px"
-            android:layout_height="40dp"
-            android:background="@drawable/border"
-            android:backgroundTint="#028472"
-            android:layout_weight="3"
-            android:text="정상작동중"
-            android:gravity="center"
-            android:textSize="11dp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:weightSum="10">
-
-        <Button
-            android:id="@+id/declaration_btn"
-            android:layout_width="0px"
-            android:layout_height="40dp"
-            android:layout_marginRight="5dp"
-            android:background="@drawable/border"
-            android:text="신고하기"
-            android:textColor="#000"
-            android:textStyle="bold"
-            android:layout_weight="5"
-            />
-
-        <Button
-            android:id="@+id/find_btn"
-            android:layout_width="0px"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/border"
-            android:backgroundTint="#028472"
-            android:text="길안내 시작"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:layout_weight="5"
-            />
-
-    </LinearLayout>
-</LinearLayout>
-</FrameLayout>
+    </FrameLayout>
 
 </layout>
 

@@ -1,10 +1,13 @@
 package com.cookandroid.happycup.ui.main.view.dialog
 
+import android.Manifest
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -14,6 +17,8 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import com.cookandroid.gachon_study_room.ui.base.BaseDialog
 import com.cookandroid.happycup.R
@@ -21,21 +26,23 @@ import com.cookandroid.happycup.databinding.CustomDialogBinding
 import com.cookandroid.happycup.databinding.DialogListBinding
 import com.google.android.gms.location.*
 
-class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<CustomDialogBinding>(context, R.layout.custom_dialog) {
-    val TAG: String = "로그"
+
+class MyCustomDialog(context: Context, lat: Double, lng: Double, name:String) : BaseDialog<CustomDialogBinding>(context, R.layout.custom_dialog) {
     val lat = lat
     val lng = lng
+    val name = name
+
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest // 위치 요청
     lateinit var locationCallback: MyLocationCallBack // 내부 클래스, 위치 변경 후 지도에 표시.
     val REQUEST_ACCESS_FINE_LOCATION = 1000
+
     private lateinit var bindingTwo: DialogListBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         window!!.setGravity(Gravity.TOP) // 팝업창 위로 배치
-
         window!!.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         bindingTwo = DataBindingUtil.inflate(
             LayoutInflater.from(context),
@@ -43,6 +50,9 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<Cu
             null,
             false
         )
+
+        binding.popname.setText("$name")
+
         // 어플이 사용되는 동안 화면 끄지 않기.
         binding.declarationBtn.setOnClickListener {
             setContentView(R.layout.dialog_list)
@@ -82,11 +92,16 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<Cu
             //locationRequest.interval = 10000 // 내 위치 지도 전달 간격
             //locationRequest.fastestInterval = 5000 // 지도 갱신 간격.
 
-            fusedLocationProviderClient.requestLocationUpdates(
-                locationRequest,
-                locationCallback,
-                null
-            )
+            if (
+                ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                fusedLocationProviderClient.requestLocationUpdates(
+                    locationRequest,
+                    locationCallback,
+                    null
+                )
+            }
 
             MyLocationCallBack()
         }
@@ -110,7 +125,7 @@ class MyCustomDialog(context: Context, lat: Double, lng: Double) : BaseDialog<Cu
 
                 startActivity(context, intent, null)
 
-                Toast.makeText(context, "$latitude, $longitude", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "$latitude, $longitude", Toast.LENGTH_SHORT).show()
 
             }
         }
