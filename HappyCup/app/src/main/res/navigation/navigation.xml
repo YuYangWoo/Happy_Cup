@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_mainFragment_to_shopFragment"
             app:destination="@id/shopFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_pointFragment"
+            app:destination="@id/pointFragment" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -43,5 +46,16 @@
         <action
             android:id="@+id/action_shopFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pointFragment"
+        android:name="com.cookandroid.happycup.ui.main.view.fragment.PointFragment"
+        android:label="PointFragment" >
+        <action
+            android:id="@+id/action_pointFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_pointFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
     </fragment>
 </navigation>

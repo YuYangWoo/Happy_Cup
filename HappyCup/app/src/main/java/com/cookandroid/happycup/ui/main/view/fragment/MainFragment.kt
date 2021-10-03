@@ -15,6 +15,7 @@ import android.media.audiofx.BassBoost
 import android.net.Uri
 import android.os.Build
 import android.os.Looper
+import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -146,9 +147,17 @@ class MainFragment :
                 toast(requireContext(), "Cancelled")
             } else { // 스캔 되었을 때
                 Log.d(TAG, result.contents)
+                var intent = Intent().apply {
+                    action = MediaStore.ACTION_IMAGE_CAPTURE
+                }
+                startActivityForResult(intent, TAKE_PICTURE)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
+        }
+
+        if(requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToPointFragment())
         }
     }
 
@@ -339,6 +348,7 @@ class MainFragment :
         const val TAG = "Main_F"
         const val PERMISSION_REQUEST_CODE = 1001
         private var mapStatus = false
+        const val TAKE_PICTURE = 1
     }
 
 }
