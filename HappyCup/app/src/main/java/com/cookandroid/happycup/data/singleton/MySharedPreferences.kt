@@ -6,9 +6,10 @@ import com.cookandroid.happycup.data.model.response.LoginResponse
 
 object MySharedPreferences {
     private val MY_ACCOUNT : String = "account"
+    private val ON_BOARDING = "onBoarding"
 
     fun setOnBoarding(context: Context, flag: Boolean) {
-        val prefs = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
         val editor = prefs.edit().apply {
             putBoolean("onBoarding", flag)
         }
@@ -16,7 +17,7 @@ object MySharedPreferences {
     }
 
     fun getOnBoarding(context: Context): Boolean {
-        val prefs = context.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
+        val prefs = context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
         return prefs.getBoolean("onBoarding", false)
     }
 

@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
@@ -33,6 +34,7 @@ import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
 import com.cookandroid.happycup.ui.main.view.dialog.MyCustomDialog
+import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
@@ -54,6 +56,13 @@ class MainFragment :
     }
 
     private fun initMapView() {
+        requireActivity().findViewById<NavigationView>(R.id.navigation).getHeaderView(0).apply {
+            findViewById<TextView>(R.id.btnShopB).setOnClickListener {
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToShopFragment())
+                requireActivity().findViewById<DrawerLayout>(R.id.drawer).closeDrawer(requireActivity().findViewById<NavigationView>(R.id.navigation))
+            }
+        }
+
         binding.mapView.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
         binding.mapView.setZoomLevel(3, true)
         makeMarker("투썸 서울역점",37.5540998765133, 126.9656410165552)

@@ -115,8 +115,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:background="@color/white"
-                    android:text="상점\n바로가기"
+                    android:background="@drawable/exchange"
+                    android:text="환전"
                     android:textColor="@android:color/black"
                     app:layout_constraintBottom_toTopOf="@+id/cstLyGuide"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -146,8 +146,8 @@
 
             <android.widget.ImageButton
                 android:id="@+id/btnLeftArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_gravity="start"
                 android:background="@drawable/left_arrow"/>
 
@@ -173,6 +173,7 @@
             android:id="@+id/btnLogout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:layout_marginTop="10dp"
             android:text="로그아웃"
             app:layout_constraintEnd_toEndOf="parent"

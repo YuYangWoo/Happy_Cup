@@ -49,6 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //            findViewById<TextView>(R.id.txtHead).text = "쿠쿠다스님의 등급은 수호자입니다"
 //            findViewById<TextView>(R.id.txtPoint).text = "잔여포인트 8,998P"
         }
+
     }
 
     // 툴바 구현 + 툴바에 Controller와 appBarConfiguration 결합
