@@ -95,4 +95,6 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-ext:$koin_version"
 
     implementation files('libs/libDaumMapAndroid.jar')
+    // photoView
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
 }

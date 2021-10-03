@@ -14,7 +14,7 @@
         app:layout_constraintGuide_percent="0.8"/>
 
     <android.widget.Button
-        android:id="@+id/btnMap"
+        android:id="@+id/btnCupping"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@color/mainColor"
@@ -27,7 +27,7 @@
         app:layout_constraintWidth_percent="0.8" />
 
     <android.widget.Button
-        android:id="@+id/btnCupping"
+        android:id="@+id/btnMap"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -37,7 +37,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMap"
+        app:layout_constraintTop_toBottomOf="@+id/btnCupping"
         app:layout_constraintWidth_percent="0.8" />
 
     <ImageView

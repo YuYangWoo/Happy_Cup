@@ -12,5 +12,6 @@
     <item
         android:title="고객센터" />
     <item
+        android:id="@+id/AIFragment"
         android:title="AI 모델(AI 모델 적용 후 삭제 예정)"/>
 </menu>
