@@ -8,9 +8,9 @@
     <item
         android:title="사용설명서" />
     <item
-        android:title="공지사항" />
-    <item
-        android:title="의견 보내기" />
+        android:title="에코 뉴스" />
     <item
         android:title="고객센터" />
+    <item
+        android:title="AI 모델(AI 모델 적용 후 삭제 예정)"/>
 </menu>

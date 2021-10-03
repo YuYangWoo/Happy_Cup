@@ -31,7 +31,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         checkAutoLogin()
         btnLogin()
         checkBox()
-        binding.fragment1.visibility = View.GONE
 
         if(MySharedPreferences.getOnBoarding(this)) { // 봤다면
             binding.fragment1.visibility = View.GONE
@@ -68,7 +67,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
-            initViewModel()
+            else {
+                initViewModel()
+            }
         }
     }
 
@@ -130,7 +131,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
-            initViewModel()
+            else {
+                initViewModel()
+            }
         }
     }
 
@@ -146,7 +149,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             MySharedPreferences.setLoginInformation(this@LoginActivity, loginResponse)
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             finish()
-
         }
     }
+
 }

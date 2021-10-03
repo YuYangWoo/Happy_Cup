@@ -162,6 +162,22 @@ class MainFragment :
     }
 
     private fun mapViewSetUp() {
+        if (checkLocationServicesStatus() &&
+            requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.d(TAG, "mapViewSetUp: 권한승인 ")
+//            startTracking()
+        } else if (checkLocationServicesStatus()) {
+            // GPS가 켜져있을 경우
+            Log.d(TAG, "mapViewSetUp: gps on ")
+            requestRuntimePermissions()
+        } else {
+            // GPS가 꺼져있을 경우
+            Log.d(TAG, "mapViewSetUp: gps off ")
+            showDialogForLocationServiceSetting()
+        }
+
         // 권한 승인 되어 있으면 Tracking
         binding.mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.56499776347082, 126.97753860438172), true);
 
@@ -240,7 +256,7 @@ class MainFragment :
         if (requireActivity().checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
         ) {
-            startTracking()
+//            startTracking()
         } else {
             ActivityCompat.requestPermissions(
                 requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),

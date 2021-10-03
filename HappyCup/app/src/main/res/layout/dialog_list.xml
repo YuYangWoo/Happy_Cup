@@ -18,7 +18,7 @@
         android:background="@drawable/dialoglist_title"
         android:text="신고 사유 선택"
         android:textSize="15dp"
-        android:textColor="#000"
+        android:textColor="@color/mainColor"
         android:gravity="center"
 
         />
@@ -71,15 +71,15 @@
 
             />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/dial_btn_4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/dialoglist_last"
         android:text="취소"
         android:textSize="20dp"
-        android:background="@drawable/dialoglistcancel"
-        android:textColor="#000"
+        android:textColor="@color/mainColor"
 
         />
 
