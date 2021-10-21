@@ -74,7 +74,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
+            android:id="@+id/cv2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
@@ -85,6 +85,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cstLy2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -93,7 +94,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.25"/>
+                    app:layout_constraintGuide_percent="0.25" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -106,8 +107,8 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/cstLyGuide"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <android.widget.Button
@@ -124,14 +125,14 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerList"
-                    android:layout_width="409dp"
-                    android:layout_height="210dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cstLyGuide"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="82dp" />
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cstLy2"
+                    app:layout_constraintEnd_toEndOf="@+id/cstLy2"
+                    app:layout_constraintStart_toStartOf="@+id/cstLy2"
+                    app:layout_constraintTop_toBottomOf="@+id/cstLyGuide" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -179,7 +180,7 @@
             android:text="로그아웃"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+            app:layout_constraintTop_toBottomOf="@+id/cv2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 
