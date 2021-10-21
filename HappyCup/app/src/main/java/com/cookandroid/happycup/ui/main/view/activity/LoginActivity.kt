@@ -60,16 +60,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
             binding.checkBox.isChecked = true
             loginRequest.id = binding.edtId.editText!!.text.toString()
             loginRequest.pw = binding.edtPassword.editText!!.text.toString()
-            if(binding.edtId.editText!!.text.toString() == "Test" && binding.edtPassword.editText!!.text.toString() == "Test") {
-                MySharedPreferences.setUserId(this@LoginActivity, binding.edtId.editText!!.text.toString())
-                MySharedPreferences.setUserPass(this@LoginActivity, binding.edtPassword.editText!!.text.toString())
-                MySharedPreferences.setLoginInformation(this@LoginActivity, loginResponse)
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-            }
-            else {
                 initViewModel()
-            }
+
         }
     }
 
@@ -124,16 +116,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 //            input["password"] = binding.edtPassword.editText!!.text.toString()
             loginRequest.id = binding.edtId.editText!!.text.toString()
             loginRequest.pw = binding.edtPassword.editText!!.text.toString()
-            if(binding.edtId.editText!!.text.toString() == "Test" && binding.edtPassword.editText!!.text.toString() == "Test") {
-                MySharedPreferences.setUserId(this@LoginActivity, binding.edtId.editText!!.text.toString())
-                MySharedPreferences.setUserPass(this@LoginActivity, binding.edtPassword.editText!!.text.toString())
-                MySharedPreferences.setLoginInformation(this@LoginActivity, loginResponse)
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-            }
-            else {
                 initViewModel()
-            }
         }
     }
 

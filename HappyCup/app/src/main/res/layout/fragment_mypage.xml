@@ -146,10 +146,11 @@
 
             <android.widget.ImageButton
                 android:id="@+id/btnLeftArrow"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:background="@drawable/left_arrow"/>
+                android:background="@color/white"
+                android:src="@drawable/left_arrow"/>
 
             <android.widget.ImageButton
                 android:id="@+id/btnAlram"
