@@ -35,6 +35,7 @@ import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
 import com.cookandroid.happycup.ui.main.view.dialog.MyCustomDialog
+import com.cookandroid.happycup.ui.main.view.dialog.QRDialog
 import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import net.daum.mf.map.api.CalloutBalloonAdapter
@@ -116,6 +117,10 @@ class MainFragment :
         makeMarker("남산롯데캐슬아이리스",37.55813374405395, 126.98198605949479)
         makeMarker("씨네큐브 광화문점",37.56936829398569, 126.97238277141572)
         makeMarker("정동극장",37.56580784241997, 126.97287747628042)
+        makeMarker("동서울대학교",37.459843173973745, 127.12670233482174)
+        makeMarker("서울국제학교",37.46531897583183, 127.12816145655475)
+        makeMarker("복정로3번지",37.463649878122354, 127.12691691150728)
+        makeMarker("복정초등학교", 37.462131903562266, 127.12854501242737)
     }
 
     private fun btn() {
@@ -124,6 +129,9 @@ class MainFragment :
         }
         binding.btnShop.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToShopFragment())
+        }
+        binding.btnMakeQR.setOnClickListener {
+            QRDialog(requireContext()).show()
         }
     }
 
