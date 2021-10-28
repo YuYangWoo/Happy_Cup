@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_mainFragment_to_AIFragment"
             app:destination="@id/AIFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_kindDialog"
+            app:destination="@id/kindDialog" />
     </fragment>
     <fragment
         android:id="@+id/myPageFragment"
@@ -69,4 +72,8 @@
             android:id="@+id/action_AIFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/kindDialog"
+        android:name="com.cookandroid.happycup.ui.main.view.dialog.KindDialog"
+        android:label="KindDialog" />
 </navigation>

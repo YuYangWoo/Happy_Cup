@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cstLy"
+        android:background="@drawable/border1"
+        android:layout_width="250dp"
+        android:layout_height="200dp">
+
+        <TextView
+            android:id="@+id/txtChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="컵 종류 선택"
+            android:textColor="@color/mainColor"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cstLy" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/mainColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtChoice" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/BaseTextStyle"
+            android:text="QR 인식 완료!\n이제 AI에 컵을 인식해주세요"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.4"
+       />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8"
+            />
+        <View
+            android:id="@+id/viewType"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/mainColor"
+            app:layout_constraintTop_toBottomOf="@id/guideline1" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            />
+
+        <android.widget.Button
+            android:id="@+id/btnPaper"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            style="@style/BaseTextStyle"
+            android:background="@drawable/round_background_subcolor"
+            android:textSize="11sp"
+            android:text="종이컵"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/viewType"
+            app:layout_constraintStart_toStartOf="parent" />
+        <android.widget.Button
+            android:id="@+id/btnPlastic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@android:color/transparent"
+            style="@style/BaseTextStyle"
+            android:textSize="11sp"
+            android:text="플라스틱컵"
+            app:layout_constraintStart_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/viewType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

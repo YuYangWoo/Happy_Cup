@@ -34,6 +34,8 @@ import com.cookandroid.happycup.ui.base.BaseFragment
 import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
+import com.cookandroid.happycup.ui.main.view.dialog.FailQRDialog
+import com.cookandroid.happycup.ui.main.view.dialog.KindDialog
 import com.cookandroid.happycup.ui.main.view.dialog.MyCustomDialog
 import com.cookandroid.happycup.ui.main.view.dialog.QRDialog
 import com.google.android.material.navigation.NavigationView
@@ -155,10 +157,20 @@ class MainFragment :
                 toast(requireContext(), "Cancelled")
             } else { // 스캔 되었을 때
                 Log.d(TAG, result.contents)
-                var intent = Intent().apply {
-                    action = MediaStore.ACTION_IMAGE_CAPTURE
+                val content = result.contents.split(",")
+                if(content[0].split(":")[1] == "true" && content[1].split(":")[1] == "1") {
+//                    KindDialog(requireContext()).show()
+//                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToKindDialog())
+                    KindDialog().show(requireActivity().supportFragmentManager,"dd")
+//                    var intent = Intent().apply {
+//                        action = MediaStore.ACTION_IMAGE_CAPTURE
+//                    }
+//                    startActivityForResult(intent, TAKE_PICTURE)
                 }
-                startActivityForResult(intent, TAKE_PICTURE)
+                else {
+                    FailQRDialog(requireContext()).show()
+//                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToFailQRDialog())
+                }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
