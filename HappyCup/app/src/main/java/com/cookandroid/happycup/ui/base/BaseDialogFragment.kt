@@ -1,4 +1,4 @@
-package com.cookandroid.gachon_study_room.ui.base
+package com.cookandroid.happycup.ui.base
 
 import android.content.Context
 import android.graphics.Point
@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 
 abstract class BaseDialogFragment<VB: ViewDataBinding>(private val layoutId: Int) : DialogFragment() {
     protected lateinit var binding: VB

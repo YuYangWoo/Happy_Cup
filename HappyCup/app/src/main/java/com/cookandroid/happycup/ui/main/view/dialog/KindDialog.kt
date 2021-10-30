@@ -1,77 +1,37 @@
 package com.cookandroid.happycup.ui.main.view.dialog
 
-import android.content.Context
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
-import android.os.Bundle
-import android.util.Log
+import android.provider.MediaStore
 import android.view.*
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
-import com.cookandroid.gachon_study_room.ui.base.BaseDialogFragment
+import com.cookandroid.happycup.ui.base.BaseDialogFragment
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.databinding.DialogKindBinding
-import java.lang.Exception
+import com.cookandroid.happycup.ui.main.view.fragment.MainFragment
 
-class KindDialog : DialogFragment() {
-    protected lateinit var binding: DialogKindBinding
+class KindDialog : BaseDialogFragment<DialogKindBinding>(R.layout.dialog_kind) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-      val view = inflater.inflate(R.layout.dialog_kind, container, false)
+    override fun init() {
+        super.init()
+        btn()
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        return view
     }
+
     override fun onResume() {
         super.onResume()
+        requireContext().dialogFragmentResize(this@KindDialog, 0.7f, 0.3f)
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(
-            resources.getDimensionPixelSize(R.dimen.dimen_popup_width),
-            resources.getDimensionPixelSize(R.dimen.dimen_popup_height)
-        )
-    }
     private fun btn() {
         binding.btnPaper.setOnClickListener {
-
+            ExplainDialog("종이").show(requireActivity().supportFragmentManager, "explain")
+            dismiss()
         }
         binding.btnPlastic.setOnClickListener {
-
-        }
-    }
-    protected open fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {
-        val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        if (Build.VERSION.SDK_INT < 30) {
-
-            val display = windowManager.defaultDisplay
-            val size = Point()
-
-            display.getSize(size)
-
-            val window = dialogFragment.dialog?.window
-
-            val x = (size.x * width).toInt()
-            val y = (size.y * height).toInt()
-            window?.setLayout(x, y)
-
-        } else {
-
-            val rect = windowManager.currentWindowMetrics.bounds
-
-            val window = dialogFragment.dialog?.window
-
-            val x = (rect.width() * width).toInt()
-            val y = (rect.height() * height).toInt()
-
-            window?.setLayout(x, y)
+            ExplainDialog("플라스틱").show(requireActivity().supportFragmentManager, "explain")
+            dismiss()
         }
     }
 }
