@@ -63,65 +63,66 @@ class MainFragment :
         requireActivity().findViewById<NavigationView>(R.id.navigation).getHeaderView(0).apply {
             findViewById<TextView>(R.id.btnShopB).setOnClickListener {
                 findNavController().navigate(MainFragmentDirections.actionMainFragmentToShopFragment())
-                requireActivity().findViewById<DrawerLayout>(R.id.drawer).closeDrawer(requireActivity().findViewById<NavigationView>(R.id.navigation))
+                requireActivity().findViewById<DrawerLayout>(R.id.drawer)
+                    .closeDrawer(requireActivity().findViewById<NavigationView>(R.id.navigation))
             }
         }
 
         binding.mapView.setPOIItemEventListener(eventListener)  // 마커 클릭 이벤트 리스너 등록
         binding.mapView.setZoomLevel(3, true)
-        makeMarker("투썸 서울역점",37.5540998765133, 126.9656410165552)
-        makeMarker("카페 0.25",37.554462671674564, 126.96645595261516)
-        makeMarker("이디야 만리동고개점",37.55496449717344, 126.96398832039547)
-        makeMarker("The house 1932",37.55535379391278, 126.96742941124468)
-        makeMarker("Coffee Up",37.55456811921269, 126.96881087655738)
-        makeMarker("383커피",37.5539252882969, 126.96869074913889)
-        makeMarker("줄리아",37.55313959853627, 126.96511695843864)
-        makeMarker("서계동 커피집",37.553168566340624, 126.96432290698624)
-        makeMarker("서울역",37.55510783917329, 126.96983752855546)
-        makeMarker("카페 오구오구",37.55753756041108, 126.9681125417674)
-        makeMarker("할리스 충정래미안점",37.558775733788, 126.9661881128639)
-        makeMarker("덕수궁",37.566617721600664, 126.97523825822653)
-        makeMarker("서울광장",37.56603964290632, 126.97753288683423)
-        makeMarker("카페뜨락",37.56386828286175, 126.97472241148527)
-        makeMarker("시청역",37.56375548320803, 126.97543392423184)
-        makeMarker("한옥 카페",37.561208246590006, 126.97698923991325)
-        makeMarker("을지로역",37.565759904377394, 126.98230375949225)
-        makeMarker("광화문역",37.57133663420827, 126.97651399101295)
-        makeMarker("투썸플레이스 광화문점",37.57062726137044, 126.97418362309794)
-        makeMarker("미국 대사관",37.572768743679795, 126.97832087045177)
-        makeMarker("종각역",37.57030750945801, 126.98255197310739)
-        makeMarker("웨스턴 조선호텔",37.564122437169395, 126.97968344410697)
-        makeMarker("스탠다드차드은행",37.56089760774992, 126.98065368824346)
-        makeMarker("신세계백화점",37.560506300959986, 126.98022814256956)
-        makeMarker("투썸플레이스 명동점",37.56103683431224, 126.9825103670788)
-        makeMarker("이디야 한국은행점",37.56153861553794, 126.97898058012109)
-        makeMarker("카페 드 파리 명동2호점",37.56260170020556, 126.98374418323466)
-        makeMarker("이디야 명동점",37.56311197545062, 126.98363689487729)
-        makeMarker("인제대 서울백병원",37.56519934453298, 126.98785446837361)
-        makeMarker("카페 드롭탑",37.569767484709864, 126.98220323244101)
-        makeMarker("커피빈 광화문점",37.57000559068633, 126.97894166637674)
-        makeMarker("할리스 무교점",37.56857694340969, 126.97945665049214)
-        makeMarker("카페 이마",37.56986953024948, 126.97768639247764)
-        makeMarker("폴바셋 코리아나호텔점",37.56844083993293, 126.97653840688773)
-        makeMarker("카페서울아워",37.56700365850925, 126.97661350874819)
-        makeMarker("카페 그레이스",37.56685908843077, 126.97618435531867)
-        makeMarker("카페정담",37.56630250184627, 126.97284492603481)
-        makeMarker("르풀",37.5665957506047, 126.97212555655175)
-        makeMarker("서울 도서관",37.566358181054454, 126.97783068569738)
-        makeMarker("IBK기업은행",37.56759808766125, 126.9795524784526)
-        makeMarker("맥도날드",37.5540998765133, 126.9656410165552)
-        makeMarker("롯데호텔 서울점",37.565731426106716, 126.98101696460506)
-        makeMarker("롯데백화점",37.56466114286707, 126.98216308529328)
-        makeMarker("스타벅스 을지로입구역점",37.565520080453375, 126.98346127445532)
-        makeMarker("제주은행",37.56383621328592, 126.9845180648008)
-        makeMarker("카페베네",37.56186314877985, 126.98759724076503)
-        makeMarker("명동역 1번출구",37.56085108248358, 126.98708225663268)
-        makeMarker("남산롯데캐슬아이리스",37.55813374405395, 126.98198605949479)
-        makeMarker("씨네큐브 광화문점",37.56936829398569, 126.97238277141572)
-        makeMarker("정동극장",37.56580784241997, 126.97287747628042)
-        makeMarker("동서울대학교",37.459843173973745, 127.12670233482174)
-        makeMarker("서울국제학교",37.46531897583183, 127.12816145655475)
-        makeMarker("복정로3번지",37.463649878122354, 127.12691691150728)
+        makeMarker("투썸 서울역점", 37.5540998765133, 126.9656410165552)
+        makeMarker("카페 0.25", 37.554462671674564, 126.96645595261516)
+        makeMarker("이디야 만리동고개점", 37.55496449717344, 126.96398832039547)
+        makeMarker("The house 1932", 37.55535379391278, 126.96742941124468)
+        makeMarker("Coffee Up", 37.55456811921269, 126.96881087655738)
+        makeMarker("383커피", 37.5539252882969, 126.96869074913889)
+        makeMarker("줄리아", 37.55313959853627, 126.96511695843864)
+        makeMarker("서계동 커피집", 37.553168566340624, 126.96432290698624)
+        makeMarker("서울역", 37.55510783917329, 126.96983752855546)
+        makeMarker("카페 오구오구", 37.55753756041108, 126.9681125417674)
+        makeMarker("할리스 충정래미안점", 37.558775733788, 126.9661881128639)
+        makeMarker("덕수궁", 37.566617721600664, 126.97523825822653)
+        makeMarker("서울광장", 37.56603964290632, 126.97753288683423)
+        makeMarker("카페뜨락", 37.56386828286175, 126.97472241148527)
+        makeMarker("시청역", 37.56375548320803, 126.97543392423184)
+        makeMarker("한옥 카페", 37.561208246590006, 126.97698923991325)
+        makeMarker("을지로역", 37.565759904377394, 126.98230375949225)
+        makeMarker("광화문역", 37.57133663420827, 126.97651399101295)
+        makeMarker("투썸플레이스 광화문점", 37.57062726137044, 126.97418362309794)
+        makeMarker("미국 대사관", 37.572768743679795, 126.97832087045177)
+        makeMarker("종각역", 37.57030750945801, 126.98255197310739)
+        makeMarker("웨스턴 조선호텔", 37.564122437169395, 126.97968344410697)
+        makeMarker("스탠다드차드은행", 37.56089760774992, 126.98065368824346)
+        makeMarker("신세계백화점", 37.560506300959986, 126.98022814256956)
+        makeMarker("투썸플레이스 명동점", 37.56103683431224, 126.9825103670788)
+        makeMarker("이디야 한국은행점", 37.56153861553794, 126.97898058012109)
+        makeMarker("카페 드 파리 명동2호점", 37.56260170020556, 126.98374418323466)
+        makeMarker("이디야 명동점", 37.56311197545062, 126.98363689487729)
+        makeMarker("인제대 서울백병원", 37.56519934453298, 126.98785446837361)
+        makeMarker("카페 드롭탑", 37.569767484709864, 126.98220323244101)
+        makeMarker("커피빈 광화문점", 37.57000559068633, 126.97894166637674)
+        makeMarker("할리스 무교점", 37.56857694340969, 126.97945665049214)
+        makeMarker("카페 이마", 37.56986953024948, 126.97768639247764)
+        makeMarker("폴바셋 코리아나호텔점", 37.56844083993293, 126.97653840688773)
+        makeMarker("카페서울아워", 37.56700365850925, 126.97661350874819)
+        makeMarker("카페 그레이스", 37.56685908843077, 126.97618435531867)
+        makeMarker("카페정담", 37.56630250184627, 126.97284492603481)
+        makeMarker("르풀", 37.5665957506047, 126.97212555655175)
+        makeMarker("서울 도서관", 37.566358181054454, 126.97783068569738)
+        makeMarker("IBK기업은행", 37.56759808766125, 126.9795524784526)
+        makeMarker("맥도날드", 37.5540998765133, 126.9656410165552)
+        makeMarker("롯데호텔 서울점", 37.565731426106716, 126.98101696460506)
+        makeMarker("롯데백화점", 37.56466114286707, 126.98216308529328)
+        makeMarker("스타벅스 을지로입구역점", 37.565520080453375, 126.98346127445532)
+        makeMarker("제주은행", 37.56383621328592, 126.9845180648008)
+        makeMarker("카페베네", 37.56186314877985, 126.98759724076503)
+        makeMarker("명동역 1번출구", 37.56085108248358, 126.98708225663268)
+        makeMarker("남산롯데캐슬아이리스", 37.55813374405395, 126.98198605949479)
+        makeMarker("씨네큐브 광화문점", 37.56936829398569, 126.97238277141572)
+        makeMarker("정동극장", 37.56580784241997, 126.97287747628042)
+        makeMarker("동서울대학교", 37.459843173973745, 127.12670233482174)
+        makeMarker("서울국제학교", 37.46531897583183, 127.12816145655475)
+        makeMarker("복정로3번지", 37.463649878122354, 127.12691691150728)
         makeMarker("복정초등학교", 37.462131903562266, 127.12854501242737)
     }
 
@@ -158,16 +159,15 @@ class MainFragment :
             } else { // 스캔 되었을 때
                 Log.d(TAG, result.contents)
                 val content = result.contents.split(",")
-                if(content[0].split(":")[1] == "true" && content[1].split(":")[1] == "1") {
+                if (content[0].split(":")[1] == "true" && content[1].split(":")[1] == "1") {
 //                    KindDialog(requireContext()).show()
 //                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToKindDialog())
-                    KindDialog().show(requireActivity().supportFragmentManager,"dd")
+                    KindDialog().show(requireActivity().supportFragmentManager, "dd")
 //                    var intent = Intent().apply {
 //                        action = MediaStore.ACTION_IMAGE_CAPTURE
 //                    }
 //                    startActivityForResult(intent, TAKE_PICTURE)
-                }
-                else {
+                } else {
                     FailQRDialog(requireContext()).show()
 //                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToFailQRDialog())
                 }
@@ -176,7 +176,7 @@ class MainFragment :
             super.onActivityResult(requestCode, resultCode, data)
         }
 
-        if(requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToPointFragment())
         }
     }
@@ -199,7 +199,12 @@ class MainFragment :
         }
 
         // 권한 승인 되어 있으면 Tracking
-        binding.mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.56499776347082, 126.97753860438172), true);
+        binding.mapView.setMapCenterPoint(
+            MapPoint.mapPointWithGeoCoord(
+                37.56499776347082,
+                126.97753860438172
+            ), true
+        );
 
         binding.btnGps.setOnClickListener {
             if (checkLocationServicesStatus() &&
@@ -218,7 +223,7 @@ class MainFragment :
 
     }
 
-    private fun makeMarker(name : String, Latitude : Double, Longitude : Double) {
+    private fun makeMarker(name: String, Latitude: Double, Longitude: Double) {
         val marker = MapPOIItem()
         marker.apply {
             itemName = name   // 마커 이름
@@ -233,14 +238,14 @@ class MainFragment :
         binding.mapView.addPOIItem(marker)
     }
 
-    class MarkerEventListener(val context: Context): MapView.POIItemEventListener {
+    class MarkerEventListener(val context: Context) : MapView.POIItemEventListener {
         // 마커 클릭시 메서드
         override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
             val lat: Double = poiItem?.getMapPoint()?.getMapPointGeoCoord()!!.latitude
             val lng: Double = poiItem?.getMapPoint()?.getMapPointGeoCoord()!!.longitude
             val name: String = poiItem?.getItemName()
 
-            val myCustomDialog = MyCustomDialog(context,lat,lng,name)
+            val myCustomDialog = MyCustomDialog(context, lat, lng, name)
             myCustomDialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
             myCustomDialog.show()
 
@@ -251,11 +256,19 @@ class MainFragment :
 
         }
 
-        override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, buttonType: MapPOIItem.CalloutBalloonButtonType?) {
+        override fun onCalloutBalloonOfPOIItemTouched(
+            mapView: MapView?,
+            poiItem: MapPOIItem?,
+            buttonType: MapPOIItem.CalloutBalloonButtonType?
+        ) {
             // 말풍선 클릭 시
         }
 
-        override fun onDraggablePOIItemMoved(mapView: MapView?, poiItem: MapPOIItem?, mapPoint: MapPoint?) {
+        override fun onDraggablePOIItemMoved(
+            mapView: MapView?,
+            poiItem: MapPOIItem?,
+            mapPoint: MapPoint?
+        ) {
             // 마커의 속성 중 isDraggable = true 일 때 마커를 이동시켰을 경우
         }
 

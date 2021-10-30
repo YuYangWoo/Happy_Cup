@@ -1,7 +1,12 @@
 package com.cookandroid.happycup.ui.main.view.dialog
 
+import android.app.Activity
+import android.app.Instrumentation
 import android.content.Intent
+import android.graphics.Bitmap
 import android.provider.MediaStore
+import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.databinding.DialogExplainBinding
@@ -17,11 +22,19 @@ class ExplainDialog(var kind: String) :
 
     override fun init() {
         super.init()
-
         img()
         nextScreen()
         btn()
     }
+
+    val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                val extra = intent!!.extras
+                val imageBitmap = extra!!.get("data") // bitmap
+            }
+        }
 
     private fun btn() {
         binding.chkBox.setOnClickListener {
@@ -37,22 +50,18 @@ class ExplainDialog(var kind: String) :
         }
     }
 
+
     private fun nextScreen() {
         CoroutineScope(Dispatchers.Main).launch {
-            if(MySharedPreferences.getExplain(requireContext())) {
-                var intent = Intent().apply {
-                    action = MediaStore.ACTION_IMAGE_CAPTURE
-                }
-                startActivityForResult(intent, TAKE_PICTURE)
+            var intent = Intent().apply {
+                action = MediaStore.ACTION_IMAGE_CAPTURE
+            }
+            if (MySharedPreferences.getExplain(requireContext())) {
+                startForResult.launch(intent)
             } else {
                 delay(2000L)
-                var intent = Intent().apply {
-                    action = MediaStore.ACTION_IMAGE_CAPTURE
-                }
-                startActivityForResult(intent, TAKE_PICTURE)
+                startForResult.launch(intent)
             }
-
-            dismiss()
         }
     }
 
