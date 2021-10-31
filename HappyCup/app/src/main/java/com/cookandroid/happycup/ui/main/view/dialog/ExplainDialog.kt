@@ -7,24 +7,37 @@ import android.graphics.Bitmap
 import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Observer
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.databinding.DialogExplainBinding
 import com.cookandroid.happycup.ui.base.BaseDialogFragment
 import com.cookandroid.happycup.ui.main.view.fragment.MainFragment.Companion.TAKE_PICTURE
+import com.cookandroid.happycup.ui.main.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.io.File
 
 class ExplainDialog(var kind: String) :
     BaseDialogFragment<DialogExplainBinding>(R.layout.dialog_explain) {
 
+    private val viewModel: MainViewModel by sharedViewModel()
     override fun init() {
         super.init()
         img()
         nextScreen()
         btn()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        viewModel.plasticData.observe(viewLifecycleOwner,
+        Observer { t ->
+
+        })
     }
 
     val startForResult =

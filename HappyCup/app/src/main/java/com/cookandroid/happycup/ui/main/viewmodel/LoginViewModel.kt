@@ -5,13 +5,16 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.cookandroid.happycup.data.model.request.LoginRequest
 import com.cookandroid.happycup.data.repository.LoginRepository
+import com.cookandroid.happycup.data.repository.MainRepository
 import com.cookandroid.happycup.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.lang.Exception
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     val TAG = "LOGIN_VIEWMODEL"
+
 
 //    private var _loginData = MutableLiveData<Resource<Account>>()
 //    val loginData: LiveData<Resource<Account>>
@@ -28,14 +31,14 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 //        }
 //    }
 
-fun loginApiCall(loginRequest: LoginRequest) = liveData {
-    emit(Resource.loading(null))
-    try {
-        emit(Resource.success(loginRepository.login(loginRequest)))
-    } catch (e: Exception) {
-        emit(Resource.error(null, e.message ?: "Error Occurred!"))
-        Log.d(TAG, "loginApiCall: ${e.toString()}")
+    fun loginApiCall(loginRequest: LoginRequest) = liveData {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(loginRepository.login(loginRequest)))
+        } catch (e: Exception) {
+            emit(Resource.error(null, e.message ?: "Error Occurred!"))
+            Log.d(TAG, "loginApiCall: ${e.toString()}")
+        }
     }
-}
 
 }
