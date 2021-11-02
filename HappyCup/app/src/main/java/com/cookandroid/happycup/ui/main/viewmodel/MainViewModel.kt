@@ -35,6 +35,26 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun paperApiCall1(file: RequestBody) = liveData {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.analsisPaper(file)))
+        } catch (e: java.lang.Exception) {
+            emit(Resource.error(null, e.message ?: "Error Occurred!"))
+            Log.d("TAG", "${e.toString()} ")
+        }
+    }
+
+    fun paperApiCall2(file: RequestBody) = liveData {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(mainRepository.analsisPaperTwo(file)))
+        } catch (e: java.lang.Exception) {
+            emit(Resource.error(null, e.message ?: "Error Occurred!"))
+            Log.d("TAG", "${e.toString()} ")
+        }
+    }
+
     fun getKind(string: String) {
         _kind.value = string
     }

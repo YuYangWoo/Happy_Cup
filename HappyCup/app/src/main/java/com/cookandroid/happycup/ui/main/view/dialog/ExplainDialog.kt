@@ -89,6 +89,63 @@ class ExplainDialog(var kind: String) :
                         })
                 }
                 else {
+                    CoroutineScope(Dispatchers.Main).launch {
+                       var job1 = CoroutineScope(Dispatchers.IO).launch {
+                           viewModel.paperApiCall1(bitmapToFile(imageBitmap, imgFile, fileName))
+                               .observe(viewLifecycleOwner, Observer { resource ->
+                                   when (resource.status) {
+                                       Resource.Status.SUCCESS -> {
+                                           dialog.dismiss()
+                                           val paper = resource.data!!.body()
+                                           Log.d(TAG, "통신성공: ${resource.data.body()}")
+                                       }
+                                       Resource.Status.LOADING -> {
+                                           dialog.show()
+                                       }
+                                       Resource.Status.ERROR -> {
+                                           toast(
+                                               requireContext(),
+                                               resource.message + "\n" + resources.getString(R.string.connect_fail)
+                                           )
+                                           Log.d(
+                                               TAG,
+                                               "${resource.message + "\n" + resources.getString(R.string.connect_fail)} "
+                                           )
+                                           dialog.dismiss()
+                                       }
+                                   }
+                               })
+                        }
+                        job1.join()
+                        var job2 = CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.paperApiCall2(bitmapToFile(imageBitmap, imgFile, fileName))
+                                .observe(viewLifecycleOwner, Observer { resource ->
+                                    when (resource.status) {
+                                        Resource.Status.SUCCESS -> {
+                                            dialog.dismiss()
+                                            val paper = resource.data!!.body()
+                                            Log.d(TAG, "통신성공: ${resource.data.body()}")
+                                        }
+                                        Resource.Status.LOADING -> {
+                                            dialog.show()
+                                        }
+                                        Resource.Status.ERROR -> {
+                                            toast(
+                                                requireContext(),
+                                                resource.message + "\n" + resources.getString(R.string.connect_fail)
+                                            )
+                                            Log.d(
+                                                TAG,
+                                                "${resource.message + "\n" + resources.getString(R.string.connect_fail)} "
+                                            )
+                                            dialog.dismiss()
+                                        }
+                                    }
+                                })
+                        }
+                        job2.join()
+
+                    }
 
                 }
 
