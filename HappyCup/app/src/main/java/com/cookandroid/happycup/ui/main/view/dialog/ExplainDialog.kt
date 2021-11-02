@@ -14,16 +14,27 @@ import com.cookandroid.happycup.databinding.DialogExplainBinding
 import com.cookandroid.happycup.ui.base.BaseDialogFragment
 import com.cookandroid.happycup.ui.main.view.fragment.MainFragment.Companion.TAKE_PICTURE
 import com.cookandroid.happycup.ui.main.viewmodel.MainViewModel
+import com.cookandroid.happycup.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.io.File
+import java.io.*
+import android.R.raw
+
 
 class ExplainDialog(var kind: String) :
     BaseDialogFragment<DialogExplainBinding>(R.layout.dialog_explain) {
-
+    private val dialog by lazy {
+        ProgressDialog(requireContext())
+    }
+    companion object {
+        const val TAG = "ExplainDialog"
+    }
     private val viewModel: MainViewModel by sharedViewModel()
     override fun init() {
         super.init()
@@ -35,9 +46,9 @@ class ExplainDialog(var kind: String) :
 
     private fun initViewModel() {
         viewModel.plasticData.observe(viewLifecycleOwner,
-        Observer { t ->
-
-        })
+            Observer { t ->
+                Log.d(TAG, "initViewModel:${t.toString()} ")
+            })
     }
 
     val startForResult =
@@ -45,9 +56,69 @@ class ExplainDialog(var kind: String) :
             if (result.resultCode == Activity.RESULT_OK) {
                 val intent = result.data
                 val extra = intent!!.extras
-                val imageBitmap = extra!!.get("data") // bitmap
+                val imageBitmap: Bitmap = extra!!.get("data") as Bitmap // bitmap
+                val storage: File = requireActivity().cacheDir
+                val fileName = "name.jpg"
+                val imgFile = File(storage, fileName)
+
+                if(viewModel.kind.value == "plastic") {
+                    viewModel.plastApiCall2(bitmapToFile(imageBitmap, imgFile,fileName))
+                        .observe(viewLifecycleOwner, Observer { resource ->
+                            when (resource.status) {
+                                Resource.Status.SUCCESS -> {
+                                    dialog.dismiss()
+                                    val plasticResponse = resource.data!!.body()
+                                    Log.d(TAG, "통신성공: ${resource.data.body()}")
+                                    Log.d(TAG, "통신성공: ${plasticResponse.toString()}")
+                                }
+                                Resource.Status.LOADING -> {
+                                    dialog.show()
+                                }
+                                Resource.Status.ERROR -> {
+                                    toast(
+                                        requireContext(),
+                                        resource.message + "\n" + resources.getString(R.string.connect_fail)
+                                    )
+                                    Log.d(
+                                        TAG,
+                                        "${resource.message + "\n" + resources.getString(R.string.connect_fail)} "
+                                    )
+                                    dialog.dismiss()
+                                }
+                            }
+                        })
+                }
+                else {
+
+                }
+
             }
         }
+
+    private fun bitmapToFile(imageBitmap: Bitmap, imgFile: File, fileName: String): RequestBody {
+        try {
+            imgFile.createNewFile()
+            var out = FileOutputStream(imgFile)
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, out)
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        var img = File(requireActivity().cacheDir, fileName)
+        Log.d("TAG", ": ${img}.")
+        var requestBody: RequestBody? = null
+        try {
+            var inputStream = FileInputStream(img)
+            var buf = ByteArray(inputStream.available())
+            while (inputStream.read(buf) != -1)
+                requestBody =
+                    RequestBody.create(MediaType.parse("application/octet-stream"), buf)
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return requestBody!!
+    }
 
     private fun btn() {
         binding.chkBox.setOnClickListener {
