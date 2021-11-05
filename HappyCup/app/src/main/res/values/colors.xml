@@ -10,10 +10,17 @@
 
     <color name="mainColor">#028472</color>
     <color name="subColor">#CCE6E3</color>
-    <color name="subColor1">#80C1B8</color>
     <color name="snow">#F4F4F4</color>
     <color name="silver">#CCCCCC</color>
     <color name="moon">#999999</color>
     <color name="nickel">#666666</color>
     <color name="coal">#333333</color>
+
+    <!-- 서치뷰 색상 -->
+    <color name="colorPrimary">#EC407A</color>
+    <color name="colorPrimaryDark">#EC407A</color>
+    <color name="colorAccent">#FFEE58</color>
+    <color name="colorLightGray">#BABABA</color>
+    <color name="colorGray">#7B7B7B</color>
+    <color name="colorLightPink">#FFB3B3</color>
 </resources>
