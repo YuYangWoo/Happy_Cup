@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.cookandroid.happycup"
-        minSdk 23
+        minSdk 24
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -37,17 +38,46 @@ android {
 }
 
 dependencies {
+    def lifecycle_version = "2.2.0"
+
+    implementation "io.reactivex.rxjava3:rxjava:3.0.6"
+    // rx 코틀린 - 추가
+    implementation "io.reactivex.rxjava3:rxkotlin:3.0.0"
+
+    // rx 안드로이드 - 스레드 - 스케쥴러
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    // edittext 등의 안드로이드 뷰 컴포넌트들과 연결
+    // rx 바인딩
+    implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
+    //glid image
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // okhttp
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.5.0'
+
+    // use for httploggingintercepter
+    implementation group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '4.5.0'
+
+    //viewPager
+    implementation 'com.tbuonomo:dotsindicator:4.2'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha01'
+
 
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
+
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
@@ -57,7 +87,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9'
 
-    def lifecycle_version = "2.2.0"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 
