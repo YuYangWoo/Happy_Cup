@@ -8,6 +8,7 @@ import com.cookandroid.happycup.R
 import com.cookandroid.happycup.databinding.DialogFailBinding
 import com.cookandroid.happycup.ui.base.BaseDialogFragment
 import com.cookandroid.happycup.ui.base.BaseFragment
+import kotlinx.coroutines.*
 
 class DecisionDialog : BaseFragment<DialogFailBinding>(R.layout.dialog_fail) {
     private val args: DecisionDialogArgs by navArgs()
@@ -17,14 +18,27 @@ class DecisionDialog : BaseFragment<DialogFailBinding>(R.layout.dialog_fail) {
         Log.d(TAG, "init: ${args.kind}")
         when (args.kind) {
             "QRFail" -> { // 실패
-                binding.imageView18.setImageResource(R.drawable.fail)
+                binding.imageView18.background = resources.getDrawable(R.drawable.fail, null)
+                backStack()
             }
             "returnSuccess" -> {
-                binding.imageView18.setImageResource(R.drawable.cup_success)
+                binding.imageView18.background = resources.getDrawable(R.drawable.cup_success, null)
             }
             "returnFail" -> {
-                binding.imageView18.setImageResource(R.drawable.fail)
+                binding.imageView18.background = resources.getDrawable(R.drawable.fail, null)
+                backStack()
             }
+        }
+
+
+
+
+    }
+
+    private fun backStack() {
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1500L)
+            requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
