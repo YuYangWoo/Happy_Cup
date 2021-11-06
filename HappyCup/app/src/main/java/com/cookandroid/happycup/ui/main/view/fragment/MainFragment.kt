@@ -154,7 +154,7 @@ class MainFragment :
 //                    }
 //                    startActivityForResult(intent, TAKE_PICTURE)
                 } else {
-                    DecisionDialog(requireContext(), "QRFail").show()
+//                    DecisionDialog(requireContext(), "QRFail").show(requireActivity().supportFragmentManager, "DecisionDialog")
 //                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToFailQRDialog())
                 }
             }

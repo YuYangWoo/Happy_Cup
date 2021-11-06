@@ -7,6 +7,8 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import com.cookandroid.happycup.NavigationDirections
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.databinding.DialogExplainBinding
@@ -28,9 +30,11 @@ class ExplainDialog(var kind: String) :
     private val dialog by lazy {
         ProgressDialog(requireContext())
     }
+
     companion object {
         const val TAG = "ExplainDialog"
     }
+
     private val viewModel: MainViewModel by sharedViewModel()
     override fun init() {
         super.init()
@@ -57,8 +61,8 @@ class ExplainDialog(var kind: String) :
                 val fileName = "name.jpg"
                 val imgFile = File(storage, fileName)
 
-                if(viewModel.kind.value == "plastic") {
-                    viewModel.plasticApiCall2(bitmapToFile(imageBitmap, imgFile,fileName))
+                if (viewModel.kind.value == "plastic") {
+                    viewModel.plasticApiCall2(bitmapToFile(imageBitmap, imgFile, fileName))
                         .observe(viewLifecycleOwner, Observer { resource ->
                             when (resource.status) {
                                 Resource.Status.SUCCESS -> {
@@ -67,17 +71,32 @@ class ExplainDialog(var kind: String) :
                                         200 -> {
                                             val plasticResponse = resource.data!!.body()
                                             Log.d(TAG, "${plasticResponse.toString()}: ")
-                                            if(plasticResponse!!.communication_success && plasticResponse.class_name == "plastic_cup") {
-                                                DecisionDialog(requireContext(), "returnSuccess").show()
+                                            if (plasticResponse!!.communication_success && plasticResponse.class_name == "plastic_cup") {
+//                                                DecisionDialog(requireContext(), "returnSuccess").show(requireActivity().supportFragmentManager, "DecisionDialog")
+                                                findNavController().navigate(
+                                                    NavigationDirections.globalDecision(
+                                                        "returnSuccess"
+                                                    )
+                                                )
                                                 dismiss()
-                                            }
-                                            else {
-                                                DecisionDialog(requireContext(), "returnFail").show()
+                                            } else {
+                                                Log.d(TAG, "ㄹㄴㅇㄹㄹㄴㄹㅇㄹ: ")
+                                                try{
+                                                    findNavController().navigate(
+                                                        NavigationDirections.globalDecision(
+                                                            "returnFail"
+                                                        )
+                                                    ) 
+                                                } catch (e: Exception) {
+                                                    Log.d(TAG, "${e.toString()}: ")
+                                                }
+                                           
+//                                                DecisionDialog("returnFail").show(requireActivity().supportFragmentManager, "DecisionDialog")
                                                 dismiss()
                                             }
                                         }
                                         else -> {
-                                            toast(requireContext(), "${resource.data!!.code()} 발생")
+                                            toast(requireContext(), "${resource.data!!.code()} 에러")
                                         }
                                     }
 
@@ -98,34 +117,33 @@ class ExplainDialog(var kind: String) :
                                 }
                             }
                         })
-                }
-                else {
+                } else {
                     CoroutineScope(Dispatchers.Main).launch {
-                       var job1 = CoroutineScope(Dispatchers.IO).launch {
-                           viewModel.paperApiCall1(bitmapToFile(imageBitmap, imgFile, fileName))
-                               .observe(viewLifecycleOwner, Observer { resource ->
-                                   when (resource.status) {
-                                       Resource.Status.SUCCESS -> {
-                                           dialog.dismiss()
-                                           val paper = resource.data!!.body()
-                                           Log.d(TAG, "통신성공: ${resource.data.body()}")
-                                       }
-                                       Resource.Status.LOADING -> {
-                                           dialog.show()
-                                       }
-                                       Resource.Status.ERROR -> {
-                                           toast(
-                                               requireContext(),
-                                               resource.message + "\n" + resources.getString(R.string.connect_fail)
-                                           )
-                                           Log.d(
-                                               TAG,
-                                               "${resource.message + "\n" + resources.getString(R.string.connect_fail)} "
-                                           )
-                                           dialog.dismiss()
-                                       }
-                                   }
-                               })
+                        var job1 = CoroutineScope(Dispatchers.IO).launch {
+                            viewModel.paperApiCall1(bitmapToFile(imageBitmap, imgFile, fileName))
+                                .observe(viewLifecycleOwner, Observer { resource ->
+                                    when (resource.status) {
+                                        Resource.Status.SUCCESS -> {
+                                            dialog.dismiss()
+                                            val paper = resource.data!!.body()
+                                            Log.d(TAG, "통신성공: ${resource.data.body()}")
+                                        }
+                                        Resource.Status.LOADING -> {
+                                            dialog.show()
+                                        }
+                                        Resource.Status.ERROR -> {
+                                            toast(
+                                                requireContext(),
+                                                resource.message + "\n" + resources.getString(R.string.connect_fail)
+                                            )
+                                            Log.d(
+                                                TAG,
+                                                "${resource.message + "\n" + resources.getString(R.string.connect_fail)} "
+                                            )
+                                            dialog.dismiss()
+                                        }
+                                    }
+                                })
                         }
                         job1.join()
                         var job2 = CoroutineScope(Dispatchers.IO).launch {
@@ -167,7 +185,7 @@ class ExplainDialog(var kind: String) :
         try {
             imgFile.createNewFile()
             var out = FileOutputStream(imgFile)
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 40, out)
+            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
             out.close()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -179,7 +197,8 @@ class ExplainDialog(var kind: String) :
             var inputStream = FileInputStream(img)
             var buf = ByteArray(inputStream.available())
             while (inputStream.read(buf) != -1)
-                requestBody =  RequestBody.create("application/octet-stream".toMediaTypeOrNull(), buf)
+                requestBody =
+                    RequestBody.create("application/octet-stream".toMediaTypeOrNull(), buf)
 
         } catch (e: Exception) {
             e.printStackTrace()

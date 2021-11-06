@@ -76,4 +76,15 @@
         android:id="@+id/kindDialog"
         android:name="com.cookandroid.happycup.ui.main.view.dialog.KindDialog"
         android:label="KindDialog" />
+    <fragment
+        android:id="@+id/decisionDialog"
+        android:name="com.cookandroid.happycup.ui.main.view.dialog.DecisionDialog"
+        android:label="DecisionDialog" >
+        <argument
+            android:name="kind"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <action android:id="@+id/global_decision" app:destination="@+id/decisionDialog"/>
+
 </navigation>
