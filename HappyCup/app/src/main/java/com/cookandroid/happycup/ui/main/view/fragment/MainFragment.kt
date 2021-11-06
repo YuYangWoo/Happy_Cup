@@ -1,50 +1,36 @@
 package com.cookandroid.happycup.ui.main.view.fragment
 
 import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Context.LOCATION_SERVICE
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.ColorDrawable
 import android.location.LocationManager
-import android.media.audiofx.BassBoost
 import android.net.Uri
-import android.os.Build
-import android.os.Looper
-import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import com.cookandroid.happycup.R
-import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.ui.base.BaseFragment
 import com.cookandroid.happycup.databinding.FragmentMainBinding
 import com.cookandroid.happycup.ui.main.view.activity.CaptureActivity
 import com.cookandroid.happycup.ui.main.view.activity.MainActivity
-import com.cookandroid.happycup.ui.main.view.dialog.FailQRDialog
+import com.cookandroid.happycup.ui.main.view.dialog.DecisionDialog
 import com.cookandroid.happycup.ui.main.view.dialog.KindDialog
 import com.cookandroid.happycup.ui.main.view.dialog.MyCustomDialog
 import com.cookandroid.happycup.ui.main.view.dialog.QRDialog
 import com.google.android.material.navigation.NavigationView
 import com.google.zxing.integration.android.IntentIntegrator
-import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import kotlin.math.log
 
 
 class MainFragment :
@@ -168,7 +154,7 @@ class MainFragment :
 //                    }
 //                    startActivityForResult(intent, TAKE_PICTURE)
                 } else {
-                    FailQRDialog(requireContext()).show()
+                    DecisionDialog(requireContext(), "QRFail").show()
 //                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToFailQRDialog())
                 }
             }

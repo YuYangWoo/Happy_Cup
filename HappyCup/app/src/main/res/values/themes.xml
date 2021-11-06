@@ -13,7 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
+    <style name="BaseTextStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <!-- BaseText -->
     <style name="BaseText">
         <item name ="android:textColor">@color/black</item>

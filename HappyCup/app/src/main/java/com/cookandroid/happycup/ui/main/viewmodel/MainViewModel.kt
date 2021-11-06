@@ -25,7 +25,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 //        }
 //    }
 
-    fun plastApiCall2(file: RequestBody) = liveData {
+    fun plasticApiCall2(file: RequestBody) = liveData {
         emit(Resource.loading(null))
         try {
             emit(Resource.success(mainRepository.analsisPlastic(file)))

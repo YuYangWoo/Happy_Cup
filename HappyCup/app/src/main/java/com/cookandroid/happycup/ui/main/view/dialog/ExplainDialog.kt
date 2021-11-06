@@ -1,7 +1,6 @@
 package com.cookandroid.happycup.ui.main.view.dialog
 
 import android.app.Activity
-import android.app.Instrumentation
 import android.content.Intent
 import android.graphics.Bitmap
 import android.provider.MediaStore
@@ -12,19 +11,16 @@ import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.databinding.DialogExplainBinding
 import com.cookandroid.happycup.ui.base.BaseDialogFragment
-import com.cookandroid.happycup.ui.main.view.fragment.MainFragment.Companion.TAKE_PICTURE
 import com.cookandroid.happycup.ui.main.viewmodel.MainViewModel
 import com.cookandroid.happycup.util.Resource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MultipartBody
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.*
-import android.R.raw
 
 
 class ExplainDialog(var kind: String) :
@@ -62,14 +58,29 @@ class ExplainDialog(var kind: String) :
                 val imgFile = File(storage, fileName)
 
                 if(viewModel.kind.value == "plastic") {
-                    viewModel.plastApiCall2(bitmapToFile(imageBitmap, imgFile,fileName))
+                    viewModel.plasticApiCall2(bitmapToFile(imageBitmap, imgFile,fileName))
                         .observe(viewLifecycleOwner, Observer { resource ->
                             when (resource.status) {
                                 Resource.Status.SUCCESS -> {
                                     dialog.dismiss()
-                                    val plasticResponse = resource.data!!.body()
-                                    Log.d(TAG, "통신성공: ${resource.data.body()}")
-                                    Log.d(TAG, "통신성공: ${plasticResponse.toString()}")
+                                    when (resource.data!!.code()) {
+                                        200 -> {
+                                            val plasticResponse = resource.data!!.body()
+                                            Log.d(TAG, "${plasticResponse.toString()}: ")
+                                            if(plasticResponse!!.communication_success && plasticResponse.class_name == "plastic_cup") {
+                                                DecisionDialog(requireContext(), "returnSuccess").show()
+                                                dismiss()
+                                            }
+                                            else {
+                                                DecisionDialog(requireContext(), "returnFail").show()
+                                                dismiss()
+                                            }
+                                        }
+                                        else -> {
+                                            toast(requireContext(), "${resource.data!!.code()} 발생")
+                                        }
+                                    }
+
                                 }
                                 Resource.Status.LOADING -> {
                                     dialog.show()
@@ -168,8 +179,7 @@ class ExplainDialog(var kind: String) :
             var inputStream = FileInputStream(img)
             var buf = ByteArray(inputStream.available())
             while (inputStream.read(buf) != -1)
-                requestBody =
-                    RequestBody.create(MediaType.parse("application/octet-stream"), buf)
+                requestBody =  RequestBody.create("application/octet-stream".toMediaTypeOrNull(), buf)
 
         } catch (e: Exception) {
             e.printStackTrace()

@@ -45,7 +45,7 @@
         <activity android:name=".ui.main.view.fragment.PhotoCollectionActivity"/>
 
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="4a2968cce9ca2fa2ab3e18ac53c8453b"/>
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="54503fd3af9327fcbcc8173a9a8481d3"/>
 
     </application>
 
