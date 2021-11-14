@@ -33,8 +33,8 @@
 -  CPU : I5-8265U
 -  RAM : 8GB
   ## 😁 Teams
-  Android : 유양우, 박성준
-  App Server : 유양우
-  AI Model & Server : 김세희, 이준희
-  Design : 서유진
+  Android : 유양우, 박성준  
+  App Server : 유양우  
+  AI Model & Server : 김세희, 이준희  
+  Design : 서유진  
  
