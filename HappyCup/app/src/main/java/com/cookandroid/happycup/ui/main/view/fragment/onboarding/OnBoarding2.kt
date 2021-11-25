@@ -1,4 +1,4 @@
-package com.cookandroid.happycup.ui.main.view.fragment
+package com.cookandroid.happycup.ui.main.view.fragment.onboarding
 
 import androidx.viewpager2.widget.ViewPager2
 import com.cookandroid.happycup.R

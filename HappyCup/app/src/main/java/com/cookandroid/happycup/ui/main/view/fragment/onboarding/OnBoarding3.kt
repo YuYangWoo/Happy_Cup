@@ -1,12 +1,10 @@
-package com.cookandroid.happycup.ui.main.view.fragment
+package com.cookandroid.happycup.ui.main.view.fragment.onboarding
 
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.ImageView
 import androidx.constraintlayout.widget.Guideline
-import androidx.navigation.fragment.findNavController
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.data.singleton.MySharedPreferences
 import com.cookandroid.happycup.databinding.FragmentOnboarding3Binding

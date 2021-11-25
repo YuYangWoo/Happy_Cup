@@ -1,4 +1,4 @@
-package com.cookandroid.happycup.ui.main.view.fragment
+package com.cookandroid.happycup.ui.main.view.fragment.onboarding
 
 import com.cookandroid.happycup.R
 import com.cookandroid.happycup.databinding.FragmentOnboardingBinding
@@ -14,7 +14,7 @@ class OnBoarding : BaseFragment<FragmentOnboardingBinding>(R.layout.fragment_onb
 
     private fun setupViewPager() {
         val fragmentList = arrayListOf(
-            OnBoarding1.newInstance(),OnBoarding2.newInstance(),OnBoarding3.newInstance()
+            OnBoarding1.newInstance(), OnBoarding2.newInstance(), OnBoarding3.newInstance()
         )
 
         val adapter = ViewPagerAdapter(

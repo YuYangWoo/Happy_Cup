@@ -72,20 +72,16 @@ class ExplainDialog(var kind: String) :
                                             Log.d(TAG, "${plasticResponse.toString()}: ")
                                             if (plasticResponse!!.communication_success && plasticResponse.class_name == "plastic_cup") {
 //                                                DecisionDialog(requireContext(), "returnSuccess").show(requireActivity().supportFragmentManager, "DecisionDialog")
-                                                findNavController().navigate(
-                                                    NavigationDirections.globalDecision(
-                                                        "returnSuccess"
-                                                    )
-                                                )
+
                                                 dismiss()
                                             } else {
-                                                Log.d(TAG, "ㄹㄴㅇㄹㄹㄴㄹㅇㄹ: ")
                                                 try {
-                                                    findNavController().navigate(
-                                                        NavigationDirections.globalDecision(
-                                                            "returnFail"
-                                                        )
-                                                    )
+//                                                    findNavController().navigate(
+//                                                        NavigationDirections.globalDecision(
+//                                                            "returnFail"
+//                                                        )
+//                                                    )
+                                                    findNavController().navigate(NavigationDirections.pointFragment())
                                                 } catch (e: Exception) {
                                                     Log.d(TAG, "${e.toString()}: ")
                                                 }
@@ -118,7 +114,6 @@ class ExplainDialog(var kind: String) :
                         })
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
-                        var job1 = CoroutineScope(Dispatchers.IO).launch {
                             viewModel.paperApiCall1(bitmapToFile(imageBitmap, imgFile, fileName))
                                 .observe(viewLifecycleOwner, Observer { resource ->
                                     when (resource.status) {
@@ -143,8 +138,8 @@ class ExplainDialog(var kind: String) :
                                         }
                                     }
                                 })
-                        }
-                        job1.join()
+
+
                         var job2 = CoroutineScope(Dispatchers.IO).launch {
                             viewModel.paperApiCall2(bitmapToFile(imageBitmap, imgFile, fileName))
                                 .observe(viewLifecycleOwner, Observer { resource ->

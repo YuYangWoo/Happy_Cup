@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/onBoarding"
-        android:name="com.cookandroid.happycup.ui.main.view.fragment.OnBoarding"
+        android:name="com.cookandroid.happycup.ui.main.view.fragment.onboarding.OnBoarding"
         android:label="OnBoarding" />
 </navigation>
