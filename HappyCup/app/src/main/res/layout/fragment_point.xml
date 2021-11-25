@@ -44,10 +44,11 @@
         <ImageView
             android:id="@+id/imgTree"
             android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toTopOf="@id/cstLyGuide2"
             app:layout_constraintTop_toBottomOf="@+id/txtTopic"/>
 
         <TextView
@@ -86,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:bufferType="spannable"
             android:text="내 포인트"
             app:layout_constraintStart_toEndOf="@id/cstLyGuideLeft"
             app:layout_constraintTop_toBottomOf="@id/cstLyGuide2" />
@@ -96,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="9600P"
+            android:bufferType="spannable"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@id/cstLyGuideRight"
             app:layout_constraintTop_toBottomOf="@id/cstLyGuide2" />
@@ -119,6 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
+            android:bufferType="spannable"
             android:text="이번달 적립 횟수"
             app:layout_constraintBottom_toTopOf="@+id/btnCupping"
             app:layout_constraintStart_toEndOf="@id/cstLyGuideLeft" />
@@ -128,6 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
+            android:bufferType="spannable"
             android:text="24건"
             app:layout_constraintBottom_toTopOf="@+id/btnCupping"
             app:layout_constraintEnd_toStartOf="@id/cstLyGuideRight" />
