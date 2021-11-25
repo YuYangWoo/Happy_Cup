@@ -23,6 +23,7 @@ class DecisionDialog : BaseFragment<DialogFailBinding>(R.layout.dialog_fail) {
             }
             "returnSuccess" -> {
                 binding.imageView18.background = resources.getDrawable(R.drawable.cup_success, null)
+
             }
             "returnFail" -> {
                 binding.imageView18.background = resources.getDrawable(R.drawable.fail, null)

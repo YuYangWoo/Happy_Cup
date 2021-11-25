@@ -40,7 +40,6 @@ class ExplainDialog(var kind: String) :
         super.init()
         img()
         nextScreen()
-        btn()
         initViewModel()
     }
 
@@ -81,16 +80,16 @@ class ExplainDialog(var kind: String) :
                                                 dismiss()
                                             } else {
                                                 Log.d(TAG, "ㄹㄴㅇㄹㄹㄴㄹㅇㄹ: ")
-                                                try{
+                                                try {
                                                     findNavController().navigate(
                                                         NavigationDirections.globalDecision(
                                                             "returnFail"
                                                         )
-                                                    ) 
+                                                    )
                                                 } catch (e: Exception) {
                                                     Log.d(TAG, "${e.toString()}: ")
                                                 }
-                                           
+
 //                                                DecisionDialog("returnFail").show(requireActivity().supportFragmentManager, "DecisionDialog")
                                                 dismiss()
                                             }
@@ -206,11 +205,7 @@ class ExplainDialog(var kind: String) :
         return requestBody!!
     }
 
-    private fun btn() {
-        binding.chkBox.setOnClickListener {
-            MySharedPreferences.setExplain(requireContext(), true)
-        }
-    }
+
 
     private fun img() {
         if (kind == "종이") {
@@ -226,12 +221,9 @@ class ExplainDialog(var kind: String) :
             var intent = Intent().apply {
                 action = MediaStore.ACTION_IMAGE_CAPTURE
             }
-            if (MySharedPreferences.getExplain(requireContext())) {
-                startForResult.launch(intent)
-            } else {
-                delay(2000L)
-                startForResult.launch(intent)
-            }
+            delay(2000L)
+            startForResult.launch(intent)
+
         }
     }
 

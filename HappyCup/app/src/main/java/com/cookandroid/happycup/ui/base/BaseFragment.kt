@@ -2,6 +2,7 @@ package com.cookandroid.happycup.ui.base
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,5 +44,28 @@ abstract class BaseFragment<VB : ViewDataBinding>(private val layoutId: Int) : F
             snackbar.dismiss()
         })
         snackbar.show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart")
+    }
+    companion object{
+        private const val TAG = "BaseFragment"
     }
 }

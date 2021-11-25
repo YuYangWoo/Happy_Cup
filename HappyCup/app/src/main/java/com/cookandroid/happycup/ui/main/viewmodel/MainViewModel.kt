@@ -13,7 +13,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         get() = _plasticData
     private var _kind = MutableLiveData<String>()
     val kind: LiveData<String>
-    get() = _kind
+        get() = _kind
 //    fun plasticApiCall(file: MultipartBody.Part) {
 //        viewModelScope.launch(Dispatchers.IO) {
 //            _plasticData.postValue(Resource.loading(null))

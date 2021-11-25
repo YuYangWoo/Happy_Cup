@@ -12,6 +12,7 @@ import android.location.LocationManager
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
@@ -39,6 +40,7 @@ class MainFragment :
 
     override fun init() {
         super.init()
+        binding.btnMakeQR.visibility = View.GONE
         mapViewSetUp()
         btnHamburger()
         btn()

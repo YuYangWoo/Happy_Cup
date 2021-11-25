@@ -9,19 +9,6 @@ object MySharedPreferences {
     private val ON_BOARDING = "onBoarding"
     private val EXPLAIN = "explain"
 
-    fun getExplain(context: Context): Boolean {
-        val prefs = context.getSharedPreferences(EXPLAIN, Context.MODE_PRIVATE)
-        return prefs.getBoolean("explain", false)
-    }
-
-    fun setExplain(context: Context, flag: Boolean) {
-        val prefs = context.getSharedPreferences(EXPLAIN, Context.MODE_PRIVATE)
-        val editor = prefs.edit().apply {
-            putBoolean("explain", flag)
-        }
-        editor.commit()
-    }
-
     fun setOnBoarding(context: Context, flag: Boolean) {
         val prefs = context.getSharedPreferences(ON_BOARDING, Context.MODE_PRIVATE)
         val editor = prefs.edit().apply {
