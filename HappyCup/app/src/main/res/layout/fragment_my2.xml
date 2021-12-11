@@ -10,71 +10,82 @@
         android:layout_weight="3"
         android:weightSum="10"
         >
-        <ImageButton
+        <TextView
             android:id="@+id/p1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/cupping_shop1"
+            android:text="폐플라스틱 고래인형"
+            android:textSize="0dp"
             >
-        </ImageButton>
-        <ImageButton
+        </TextView>
+
+        <TextView
             android:id="@+id/p2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/cupping_shop2"
+            android:text="지구방위대형 플라피"
+            android:textSize="0dp"
             />
     </TableRow>
-
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:weightSum="10"
         >
-        <ImageButton
+        <TextView
             android:id="@+id/p3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:layout_margin="10dp"
             android:background="@drawable/cupping_shop3"
+            android:text="미피 에코 인"
+            android:textSize="0dp"
             />
-        <ImageButton
+        <TextView
             android:id="@+id/p4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:layout_margin="10dp"
             android:background="@drawable/cupping_shop4"
+            android:text="상괭이 업사이클링 굿"
+            android:textSize="0dp"
             />
     </TableRow>
-
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="3"
         android:weightSum="10"
         >
-        <ImageButton
+        <TextView
             android:id="@+id/p5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/cupping_shop5"
+            android:text="미피 에코 인"
+            android:textSize="0dp"
             />
 
-        <ImageButton
+        <TextView
             android:id="@+id/p6"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:layout_weight="5"
             android:background="@drawable/cupping_shop6"
+            android:text="하이하이 러블리베"
+            android:textSize="0dp"
             />
     </TableRow>
 

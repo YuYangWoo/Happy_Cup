@@ -311,15 +311,19 @@
                 <!-- 추천상품 부분 끝 -->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
 
         <!-- 하단 고정 메뉴바 -->
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bnv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"
+            android:visibility="visible"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/fragment_shop_menu" />
+
     </LinearLayout>
 </layout>

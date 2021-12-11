@@ -28,7 +28,7 @@ class PointFragment : BaseFragment<FragmentPointBinding>(R.layout.fragment_point
         binding.txtPoint.text = builder
         binding.txtTopic.text = txtTopicBuilder
 
-        Glide.with(requireContext()).load(R.raw.tree).into(binding.imgTree)
+        Glide.with(requireContext()).load(R.raw.point_tree).into(binding.imgTree)
         binding.btnCupping.setOnClickListener {
             findNavController().navigate(PointFragmentDirections.actionPointFragmentToShopFragment())
         }

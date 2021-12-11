@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/Desktop/Happy_Cup/HappyCup/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/Desktop/Happy_Cup/HappyCup/app/src/main/res/layout/dialog_kind.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/Desktop/Happy_Cup/HappyCup/app/src/main/res/layout/fragment_mypage.xml" value="0.2875" />
+        <entry key="..\:/Users/Admin/Desktop/Happy_Cup/HappyCup/app/src/main/res/menu/activity_main_menu.xml" value="0.25" />
         <entry key="..\:/Users/yangwoo/Desktop/HappyCup/app/src/main/res/layout/activity_login.xml" value="0.14322916666666666" />
         <entry key="..\:/Users/yangwoo/Desktop/HappyCup/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/Users/yangwoo/Desktop/Happy_Cup-main/Happy_Cup-main/HappyCup/app/src/main/res/layout/activity_main.xml" value="0.14322916666666666" />
@@ -52,6 +56,7 @@
         <entry key="..\:/Users/yangwoo/Desktop/Projects/happyCup/Happy_Cup/HappyCup/app/src/main/res/menu/fragment_my_page.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/yangwoo/Desktop/Projects/happyCup/Happy_Cup/HappyCup/app/src/main/res/menu/fragment_shop_menu.xml" value="0.1703125" />
         <entry key="..\:/Users/yangwoo/Desktop/Projects/happyCup/Happy_Cup/HappyCup/app/src/main/res/xml/network_security_config.xml" value="0.18645833333333334" />
+        <entry key="app/src/main/res/drawable-v24/background_oval.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bar_view.xml" value="0.11481481481481481" />
         <entry key="app/src/main/res/drawable/border.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/checkback.xml" value="0.1" />
@@ -63,10 +68,16 @@
         <entry key="app/src/main/res/layout/dialog_list.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1503623188405797" />
+        <entry key="app/src/main/res/layout/fragment_my2.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.10260416666666666" />
         <entry key="app/src/main/res/layout/fragment_option.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/fragment_shop.xml" value="0.1" />
         <entry key="app/src/main/res/layout/holder_my_page.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/item_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/layout_button_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/layout_search_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.10260416666666666" />
+        <entry key="app/src/main/res/layout/product.xml" value="0.1" />
       </map>
     </option>
   </component>
